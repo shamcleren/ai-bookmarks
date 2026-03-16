@@ -35,7 +35,7 @@
             border-radius: 12px;
             background: rgba(255,255,255,0.1);
             color: #fff;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .search-box:focus {
             outline: none;
@@ -43,19 +43,43 @@
             box-shadow: 0 0 20px rgba(0,217,255,0.3);
         }
         .search-box::placeholder { color: #666; }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .tab:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        .tab.active {
+            color: #00d9ff;
+            background: rgba(0,217,255,0.1);
+        }
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 30px;
-            justify-content: center;
         }
         .tag {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: rgba(255,255,255,0.1);
-            border-radius: 20px;
+            border-radius: 16px;
             cursor: pointer;
+            font-size: 13px;
             transition: all 0.3s;
+            border: none;
+            color: #aaa;
         }
         .tag:hover, .tag.active {
             background: #00d9ff;
@@ -68,26 +92,98 @@
             padding: 20px;
             transition: all 0.3s;
             border: 1px solid transparent;
+            position: relative;
         }
         .card:hover {
             background: rgba(255,255,255,0.1);
             border-color: rgba(0,217,255,0.3);
-            transform: translateY(-2px);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            font-size: 17px;
+            font-weight: 500;
         }
         .card h3 a {
             color: #00d9ff;
             text-decoration: none;
         }
         .card h3 a:hover { text-decoration: underline; }
-        .card .desc { color: #aaa; margin: 10px 0; font-size: 14px; }
-        .card .meta { display: flex; gap: 10px; font-size: 12px; color: #666; }
-        .card .tag {
-            padding: 4px 10px;
+        .card .desc {
+            color: #aaa;
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .card .meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 12px;
-            background: rgba(0,255,136,0.2);
+            color: #666;
+            margin-top: 12px;
+        }
+        .card .tag {
+            padding: 3px 10px;
+            font-size: 12px;
+            background: rgba(0,255,136,0.15);
             color: #00ff88;
         }
-        .empty { text-align: center; color: #666; padding: 40px; }
+        .card .tag:hover {
+            background: rgba(0,255,136,0.3);
+            color: #fff;
+        }
+        .card .date { color: #555; }
+        
+        .btn-collect {
+            background: transparent;
+            border: 1px solid #444;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .btn-collect:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        .btn-collect.collected {
+            background: rgba(255,107,107,0.2);
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        
+        .empty {
+            text-align: center;
+            color: #666;
+            padding: 60px 20px;
+        }
+        .empty-icon { font-size: 48px; margin-bottom: 20px; }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; }
     </style>
 </head>
 <body>
@@ -95,76 +191,141 @@
         <h1>🤖 AI Bookmarks</h1>
         <p class="subtitle">AI 编程快讯收藏夹 | 打造个人知识库</p>
         
-        <input type="text" class="search-box" placeholder="搜索收藏..." id="search">
+        <input type="text" class="search-box" placeholder="搜索快讯..." id="search">
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="all">全部</button>
+            <button class="tab" data-tab="feed">快讯</button>
+            <button class="tab" data-tab="favorites">❤️ 收藏</button>
+        </div>
         
         <div class="tags" id="tags">
-            <span class="tag active" data-tag="all">全部</span>
-            <span class="tag" data-tag="LLM">LLM</span>
-            <span class="tag" data-tag="Code">编程</span>
-            <span class="tag" data-tag="Tool">工具</span>
-            <span class="tag" data-tag="News">资讯</span>
+            <button class="tag active" data-tag="all">全部</button>
+            <button class="tag" data-tag="LLM">LLM</button>
+            <button class="tag" data-tag="Tool">工具</button>
+            <button class="tag" data-tag="Code">编程</button>
+            <button class="tag" data-tag="Content">内容</button>
+            <button class="tag" data-tag="OpenSource">开源</button>
         </div>
         
         <div class="bookmarks" id="bookmarks">
-            <div class="empty">暂无收藏，开始添加吧！</div>
+            <div class="empty">
+                <div class="empty-icon">📭</div>
+                <div>暂无内容</div>
+            </div>
         </div>
     </div>
 
+    <div class="toast" id="toast">已收藏！</div>
+
     <script>
+        // 示例数据 - 后续对接定时任务
         const bookmarks = [
             {
-                title: 'AI 编程快讯 #001',
+                id: '001',
+                title: 'OpenAI 发布 GPT-4o 新模型',
                 url: '#',
-                desc: 'OpenAI 发布 GPT-4o 新模型， Anthropic 发布 Claude 4...',
+                desc: 'GPT-4o 是 OpenAI 最新发布的多模态模型，可以处理文本、音频和图像，支持实时语音对话，性能超越现有模型。',
                 tags: ['LLM', 'News'],
-                date: '2026-03-16'
+                date: '2026-03-16',
+                type: 'feed'
+            },
+            {
+                id: '002',
+                title: 'Cursor 0.3 更新：全局 AI 搜索',
+                url: '#',
+                desc: 'Cursor 推出新版本，支持全局代码库搜索和 AI 补全，编程效率大幅提升。',
+                tags: ['Tool', 'Code'],
+                date: '2026-03-15',
+                type: 'feed'
             }
         ];
 
+        // 从 localStorage 读取收藏
+        function getFavorites() {
+            try {
+                return JSON.parse(localStorage.getItem('ai-bookmarks-favorites') || '[]');
+            } catch { return []; }
+        }
+        
+        function saveFavorites(favs) {
+            localStorage.setItem('ai-bookmarks-favorites', JSON.stringify(favs));
+        }
+
+        // UI 元素
         const search = document.getElementById('search');
+        const tabs = document.querySelectorAll('.tab');
         const tags = document.querySelectorAll('.tag');
         const container = document.getElementById('bookmarks');
+        const toast = document.getElementById('toast');
+        
+        let currentTab = 'all';
         let currentTag = 'all';
 
-        function render(data) {
-            if (!data.length) {
-                container.innerHTML = '<div class="empty">暂无收藏</div>';
+        // 渲染
+        function render() {
+            const favorites = getFavorites();
+            const q = search.value.toLowerCase();
+            
+            let filtered = bookmarks.filter(b => {
+                if (currentTab === 'favorites' && !favorites.includes(b.id)) return false;
+                if (currentTab === 'feed' && b.type !== 'feed') return false;
+                if (currentTag !== 'all' && !b.tags.includes(currentTag)) return false;
+                if (q && !b.title.toLowerCase().includes(q) && !b.desc.toLowerCase().includes(q)) return false;
+                return true;
+            });
+
+            if (!filtered.length) {
+                container.innerHTML = '<div class="empty"><div class="empty-icon">' + (currentTab === 'favorites' ? '💔' : '📭') + '</div><div>' + (currentTab === 'favorites' ? '还没有收藏' : '暂无内容') + '</div></div>';
                 return;
             }
-            container.innerHTML = data.map(item => `
-                <div class="card">
-                    <h3><a href="${item.url}" target="_blank">${item.title}</a></h3>
-                    <p class="desc">${item.desc}</p>
-                    <div class="meta">
-                        <span>${item.date}</span>
-                        ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
+
+            container.innerHTML = filtered.map(item => {
+                const collected = favorites.includes(item.id);
+                return '<div class="card"><div class="card-header"><h3><a href="' + item.url + '" target="_blank">' + item.title + '</a></h3><button class="btn-collect ' + (collected ? 'collected' : '') + '" onclick="toggleCollect(\'' + item.id + '\')">' + (collected ? '❤️ 已收藏' : '🤍 收藏') + '</button></div><p class="desc">' + item.desc + '</p><div class="meta"><span class="date">' + item.date + '</span>' + item.tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div></div>';
+            }).join('');
         }
 
-        function filter() {
-            const q = search.value.toLowerCase();
-            const filtered = bookmarks.filter(b => {
-                const matchTag = currentTag === 'all' || b.tags.includes(currentTag);
-                const matchSearch = b.title.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q);
-                return matchTag && matchSearch;
+        // 收藏切换
+        function toggleCollect(id) {
+            const favs = getFavorites();
+            const idx = favs.indexOf(id);
+            if (idx > -1) {
+                favs.splice(idx, 1);
+            } else {
+                favs.push(id);
+            }
+            saveFavorites(favs);
+            
+            toast.textContent = idx > -1 ? '已取消收藏' : '已收藏！';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 1500);
+            
+            render();
+        }
+
+        // 事件绑定
+        search.addEventListener('input', render);
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentTab = tab.dataset.tab;
+                render();
             });
-            render(filtered);
-        }
-
-        search.addEventListener('input', filter);
+        });
         
         tags.forEach(tag => {
             tag.addEventListener('click', () => {
                 tags.forEach(t => t.classList.remove('active'));
                 tag.classList.add('active');
                 currentTag = tag.dataset.tag;
-                filter();
+                render();
             });
         });
 
-        render(bookmarks);
+        render();
     </script>
 </body>
 </html>
