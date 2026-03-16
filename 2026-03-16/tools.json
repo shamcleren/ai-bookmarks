@@ -9,7 +9,11 @@
       "url": "https://www.stavros.io/posts/how-i-write-software-with-llms/",
       "sourceUrl": "https://news.ycombinator.com/item?id=47394022",
       "desc": "作者分享了他日常使用 LLM 写代码的实战经验，包括最佳实践和踩坑总结",
-      "tags": ["LLM", "编程", "经验"],
+      "tags": [
+        "LLM",
+        "编程",
+        "经验"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -24,7 +28,11 @@
       "url": "https://sebastianraschka.com/llm-architecture-gallery/",
       "sourceUrl": "https://news.ycombinator.com/item?id=47388676",
       "desc": "Sebastian Raschka 整理的 LLM 架构图库，包含 Transformer、MOE 等主流架构可视化",
-      "tags": ["LLM", "架构", "学习"],
+      "tags": [
+        "LLM",
+        "架构",
+        "学习"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -39,7 +47,11 @@
       "url": "https://developer.chrome.com/blog/chrome-devtools-mcp-debug-your-browser-session",
       "sourceUrl": "https://news.ycombinator.com/item?id=47390817",
       "desc": "Google 发布 Chrome DevTools MCP，支持通过 Model Context Protocol 调试浏览器会话",
-      "tags": ["工具", "Chrome", "MCP"],
+      "tags": [
+        "工具",
+        "Chrome",
+        "MCP"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -53,8 +65,12 @@
       "name": "LLMs can be exhausting",
       "url": "https://tomjohnell.com/llms-can-be-absolutely-exhausting/",
       "sourceUrl": "https://news.ycombinator.com/item?id=47391803",
-      "desc": "一篇关于 LLM 使用过程中"精力消耗"的文章，讨论了 AI 疲劳问题",
-      "tags": ["LLM", "思考", "效率"],
+      "desc": "一篇关于 LLM 使用过程中精力消耗的文章，讨论了 AI 疲劳问题",
+      "tags": [
+        "LLM",
+        "思考",
+        "效率"
+      ],
       "canTest": false,
       "status": "pending",
       "easeScore": 0,
@@ -69,7 +85,11 @@
       "url": "https://thatshubham.com/blog/news-audit",
       "sourceUrl": "https://news.ycombinator.com/item?id=47390945",
       "desc": "作者发现一个 49MB 的网页，探讨了现代网页膨胀问题",
-      "tags": ["Web", "性能", "有趣"],
+      "tags": [
+        "Web",
+        "性能",
+        "有趣"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -84,7 +104,11 @@
       "url": "https://stopsloppypasta.ai/",
       "sourceUrl": "https://news.ycombinator.com/item?id=47389570",
       "desc": "一个有趣的 AI 工具，可以检查你粘贴的代码是否有安全问题",
-      "tags": ["AI", "安全", "工具"],
+      "tags": [
+        "AI",
+        "安全",
+        "工具"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -99,7 +123,11 @@
       "url": "https://www.aikido.dev/blog/glassworm-returns-unicode-attack-github-npm-vscode",
       "sourceUrl": "https://news.ycombinator.com/item?id=47387047",
       "desc": "新型 Unicode 攻击卷土重来，可绕过 GitHub、NPM、VSCode 安全检测",
-      "tags": ["安全", "攻击", "GitHub"],
+      "tags": [
+        "安全",
+        "攻击",
+        "GitHub"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -114,7 +142,11 @@
       "url": "https://www.moment.dev/blog/lies-i-was-told-pt-2",
       "sourceUrl": "https://news.ycombinator.com/item?id=47359712",
       "desc": "作者揭露了协同编辑领域的常见误区，第二篇关于为什么不用 Yjs",
-      "tags": ["协作", "编辑", "技术"],
+      "tags": [
+        "协作",
+        "编辑",
+        "技术"
+      ],
       "canTest": false,
       "status": "pending",
       "easeScore": 0,
@@ -129,7 +161,11 @@
       "url": "https://go.dev/blog/inliner",
       "sourceUrl": "https://news.ycombinator.com/item?id=47339463",
       "desc": "Go 语言团队博客介绍 Go 编译器内联优化的一些变化",
-      "tags": ["Go", "编译器", "性能"],
+      "tags": [
+        "Go",
+        "编译器",
+        "性能"
+      ],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -144,7 +180,11 @@
       "url": "https://isaacfreund.com/blog/river-window-management/",
       "sourceUrl": "https://news.ycombinator.com/item?id=47388137",
       "desc": "作者探讨了将 Wayland 合成器和窗口管理器分离的设计",
-      "tags": ["Linux", "Wayland", "架构"],
+      "tags": [
+        "Linux",
+        "Wayland",
+        "架构"
+      ],
       "canTest": false,
       "status": "pending",
       "easeScore": 0,
