@@ -1,41 +1,34 @@
-// 全局日历组件 - 注入到导航栏
+// 全局日历组件 - 点击日期触发
 (function() {
     const datesWithData = {'2026-03-16': 10};
     
-    function injectCalendarLink() {
-        // 等待页面加载完成
+    function makeDateClickable() {
         setTimeout(function() {
-            // 检查是否已存在日历链接
-            if (document.getElementById('navCalendarLink')) return;
+            // 查找首页的日期元素 - 最新一期的日期
+            const latestDate = document.querySelector('.latest-date');
+            if (latestDate) {
+                latestDate.style.cursor = 'pointer';
+                latestDate.onclick = function() {
+                    showCalendarModal();
+                };
+            }
             
-            // 找到导航栏
-            const nav = document.querySelector('.nav');
-            if (!nav) return;
-            
-            // 创建日历链接
-            const link = document.createElement('a');
-            link.id = 'navCalendarLink';
-            link.href = 'javascript:void(0)';
-            link.innerHTML = '📅 日历';
-            link.style.cssText = 'color:#888;text-decoration:none;padding:12px 24px;border-radius:10px;font-size:15px;cursor:pointer;';
-            
-            link.onclick = function() {
-                showCalendarModal();
-            };
-            
-            nav.appendChild(link);
+            // 查找导航栏的日历链接，如果存在则改造成日期样式
+            const navCalendar = document.querySelector('.nav a[href*="calendar"], .nav a:has(📅)');
+            if (navCalendar) {
+                navCalendar.innerHTML = '📅 03-16';
+                navCalendar.onclick = function() { showCalendarModal(); };
+            }
         }, 100);
     }
     
     function showCalendarModal() {
-        // 如果已存在则显示
         let modal = document.getElementById('calendarModal');
         if (modal) {
             modal.style.display = 'flex';
             return;
         }
         
-        // 创建弹窗
         modal = document.createElement('div');
         modal.id = 'calendarModal';
         modal.style.cssText = 'display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9999;justify-content:center;align-items:center;';
@@ -86,8 +79,8 @@
     }
     
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', injectCalendarLink);
+        document.addEventListener('DOMContentLoaded', makeDateClickable);
     } else {
-        injectCalendarLink();
+        makeDateClickable();
     }
 })();
