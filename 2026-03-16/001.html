@@ -1,211 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <script src="../calendar.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude 4 - AI 工具评测</title>
+    <title>How I write software with LLMs - AI 工具评测</title>
+    <script src="../calendar.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 40px 20px;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #fff; padding: 40px 20px; }
         .container { max-width: 800px; margin: 0 auto; }
         .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
         .back:hover { color: #00d9ff; }
-        
         .header { margin-bottom: 40px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .header h1 { font-size: 2rem; margin-bottom: 12px; }
-        .header a { color: #00d9ff; text-decoration: none; }
-        .header a:hover { text-decoration: underline; }
-        
+        .header h1 { font-size: 1.8rem; margin-bottom: 12px; }
+        .links { margin: 10px 0; }
+        .links a { color: #00d9ff; text-decoration: none; margin-right: 15px; font-size: 14px; }
+        .links a.hn { color: #ff6600; }
         .stars { color: #ffc107; font-size: 28px; letter-spacing: 4px; margin: 15px 0; }
-        
-        .tag {
-            display: inline-block;
-            padding: 5px 14px;
-            background: rgba(0,255,136,0.12);
-            color: #00ff88;
-            border-radius: 14px;
-            font-size: 13px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-        
-        .section {
-            background: rgba(255,255,255,0.04);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            font-size: 1.15rem;
-            color: #00d9ff;
-            margin-bottom: 18px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        
-        .score-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .score-row:last-child { border: none; }
-        .score-label { color: #aaa; font-size: 15px; }
-        .score-value { font-weight: 600; font-size: 16px; }
-        .score-good { color: #00ff88; }
-        .score-mid { color: #ffc107; }
-        .score-bad { color: #ff6b6b; }
-        
-        .score-bar {
-            width: 140px;
-            height: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
-            overflow: hidden;
-            display: inline-block;
-            margin-left: 15px;
-            vertical-align: middle;
-        }
-        .score-bar-fill {
-            height: 100%;
-            border-radius: 5px;
-            transition: width 0.5s;
-        }
-        
-        .verdict { font-size: 15px; line-height: 1.9; color: #ddd; }
-        
-        .pending {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(255,193,7,0.05);
-            border: 1px dashed rgba(255,193,7,0.3);
-            border-radius: 12px;
-        }
-        .pending-icon { font-size: 42px; margin-bottom: 15px; }
+        .tag { display: inline-block; padding: 5px 14px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 14px; font-size: 13px; margin-right: 8px; margin-bottom: 8px; }
+        .section { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 25px; margin-bottom: 20px; }
+        .section h2 { font-size: 1.15rem; color: #00d9ff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .pending { text-align: center; padding: 50px 20px; background: rgba(255,193,7,0.05); border: 1px dashed rgba(255,193,7,0.3); border-radius: 12px; margin-bottom: 20px; }
         .pending h2 { color: #ffc107; border: none; padding: 0; margin-bottom: 12px; }
-        .pending p { color: #888; line-height: 1.6; }
-        
-        .feature-list { color: #ccc; line-height: 2; }
-        .feature-list li { margin-bottom: 8px; }
-        
-        .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .pros, .cons { padding: 20px; border-radius: 10px; }
-        .pros { background: rgba(0,255,136,0.08); }
-        .cons { background: rgba(255,107,107,0.08); }
-        .pros h3 { color: #00ff88; margin-bottom: 12px; }
-        .cons h3 { color: #ff6b6b; margin-bottom: 12px; }
-        .pros li, .cons li { color: #ccc; margin-bottom: 8px; }
-        
-        @media (max-width: 600px) {
-            .pros-cons { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="./list.html" class="back">← 返回列表</a>
-        
+        <a href="list.html" class="back">← 返回列表</a>
+        <a href="../index.html" class="back" style="margin-left:10px;">🏠 首页</a>
         <div class="header">
-            <h1>Claude 4 (Sonnet & Opus)</h1>
-            <a href="https://www.anthropic.com/claude/sonnet-4" target="_blank">访问官网 →</a>
+            <h1>How I write software with LLMs</h1>
+            <div class="links">
+                <a href="https://www.stavros.io/posts/how-i-write-software-with-llms/" target="_blank">🔗 原文</a>
+                <a href="https://news.ycombinator.com/item?id=47394022" class="hn" target="_blank">📰 HN讨论</a>
+            </div>
             <div class="stars">☆☆☆☆☆</div>
-            <div>
-                <span class="tag">LLM</span>
-                <span class="tag">编程</span>
-                <span class="tag">官方</span>
-            </div>
+            <div><span class="tag">LLM</span><span class="tag">编程</span><span class="tag">经验</span></div>
         </div>
-        
-        <div class="pending">
-            <div class="pending-icon">⏳</div>
-            <h2>待评测</h2>
-            <p>该工具已加入评测队列，将在本地实机测试后发布详细评测报告。<br>评测维度：易用性、实用性、是否夸大、推荐星级</p>
-        </div>
-        
+        <div class="pending"><h2>⏳ 待评测</h2><p>该工具已加入评测队列，将在本地实机测试后发布详细评测报告。</p></div>
         <div class="section">
-            <h2>📝 工具简介</h2>
-            <p style="color:#ccc;line-height:1.8;">
-                Claude 4 是 Anthropic 公司于 2025 年发布的最新大语言模型，包含两个版本：Sonnet（平衡版）和 Opus（旗舰版）。<br><br>
-                Opus 版本在多项基准测试中超越 GPT-4o，特别是在编程能力方面表现突出，支持更长的上下文理解（200K tokens），并且在安全性和指令遵循方面有显著提升。
-            </p>
-        </div>
-        
-        <div class="section">
-            <h2>🚀 核心功能</h2>
-            <ul class="feature-list">
-                <li>🧠 <strong>强大的编程能力</strong> - 代码理解、生成、调试样样精通</li>
-                <li>📚 <strong>超长上下文</strong> - 支持 200K tokens，约等于整本书</li>
-                <li>🛡️ <strong>安全可控</strong> - Anthropic 特色的宪法 AI 安全框架</li>
-                <li>💬 <strong>对话流畅</strong> - Claude 4 在对话自然度上有很大提升</li>
-                <li>📊 <strong>多模态能力</strong> - 支持图像理解和分析</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2>👍 vs 👎 优缺点</h2>
-            <div class="pros-cons">
-                <div class="pros">
-                    <h3>👍 优点</h3>
-                    <ul>
-                        <li>编程能力强，适合开发者</li>
-                        <li>上下文理解深入</li>
-                        <li>输出更有帮助且安全</li>
-                        <li>响应速度快</li>
-                    </ul>
-                </div>
-                <div class="cons">
-                    <h3>👎 缺点</h3>
-                    <ul>
-                        <li>免费版使用限制较多</li>
-                        <li>国内访问不稳定</li>
-                        <li>没有官方 API 降价</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>💰 定价</h2>
-            <p style="color:#ccc;line-height:1.8;">
-                Claude 4 Sonnet: $3/百万输入，$15/百万输出<br>
-                Claude 4 Opus: $15/百万输入，$75/百万输出<br>
-                Claude 3.5 Sonnet（新版）: $3/百万输入，$15/百万输出
-            </p>
-        </div>
-        
-        <div class="section">
-            <h2>🎯 评测维度（待测试）</h2>
-            <div class="score-row">
-                <span class="score-label">🎯 易用性</span>
-                <span><span class="score-value">-</span></span>
-            </div>
-            <div class="score-row">
-                <span class="score-label">💪 实用性</span>
-                <span><span class="score-value">-</span></span>
-            </div>
-            <div class="score-row">
-                <span class="score-label">📉 是否夸大</span>
-                <span><span class="score-value">-</span></span>
-            </div>
-            <div class="score-row">
-                <span class="score-label">⭐ 推荐指数</span>
-                <span><span class="score-value">-</span></span>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>🎬 内容建议</h2>
-            <p style="color:#ccc;line-height:1.8;">
-                可以做一期"Claude 4 vs GPT-4o 编程实测对比"视频，展示两者在代码生成、调试、解释代码等方面的实际表现差异。这类对比内容观众爱看，也能体现"拒绝云评测"的态度。
-            </p>
+            <h2>📝 简介</h2>
+            <p style="color:#ccc;line-height:1.8;">作者分享了他日常使用 LLM 写代码的实战经验，包括最佳实践和踩坑总结。这篇文章在 Hacker News 上获得 300+ 热度。</p>
         </div>
     </div>
 </body>
