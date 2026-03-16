@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Bookmarks - AI 编程快讯收藏夹</title>
+    <title>AI 工具评测 - 每日 AI 工具深度评测</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,305 +27,183 @@
             color: #888;
             margin-bottom: 40px;
         }
-        .search-box {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.1);
-            color: #fff;
+        .latest {
+            background: rgba(0,217,255,0.1);
+            border: 1px solid rgba(0,217,255,0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .latest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
-        .search-box:focus {
-            outline: none;
-            background: rgba(255,255,255,0.15);
-            box-shadow: 0 0 20px rgba(0,217,255,0.3);
-        }
-        .search-box::placeholder { color: #666; }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-        }
-        .tab {
-            padding: 10px 20px;
-            background: transparent;
-            border: none;
-            color: #888;
-            cursor: pointer;
-            font-size: 15px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        .tab:hover { color: #fff; background: rgba(255,255,255,0.1); }
-        .tab.active {
+        .latest-date {
+            font-size: 14px;
             color: #00d9ff;
-            background: rgba(0,217,255,0.1);
-        }
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 30px;
-        }
-        .tag {
+            background: rgba(0,217,255,0.2);
             padding: 6px 14px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s;
-            border: none;
-            color: #aaa;
+            border-radius: 20px;
         }
-        .tag:hover, .tag.active {
-            background: #00d9ff;
-            color: #000;
-        }
-        .bookmarks { display: grid; gap: 15px; }
-        .card {
+        .latest-title { font-size: 1.3rem; margin-bottom: 15px; }
+        
+        .item {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
             padding: 20px;
+            margin-bottom: 15px;
             transition: all 0.3s;
             border: 1px solid transparent;
-            position: relative;
         }
-        .card:hover {
+        .item:hover {
             background: rgba(255,255,255,0.1);
             border-color: rgba(0,217,255,0.3);
         }
-        .card-header {
+        .item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
         }
-        .card h3 {
-            font-size: 17px;
-            font-weight: 500;
-        }
-        .card h3 a {
+        .item h3 a {
             color: #00d9ff;
             text-decoration: none;
         }
-        .card h3 a:hover { text-decoration: underline; }
-        .card .desc {
-            color: #aaa;
-            margin: 10px 0;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        .card .meta {
+        .item h3 a:hover { text-decoration: underline; }
+        .item .desc { color: #aaa; margin: 10px 0; font-size: 14px; }
+        .item .meta {
             display: flex;
-            align-items: center;
             gap: 10px;
             font-size: 12px;
             color: #666;
             margin-top: 12px;
         }
-        .card .tag {
+        .tag {
             padding: 3px 10px;
-            font-size: 12px;
             background: rgba(0,255,136,0.15);
             color: #00ff88;
+            border-radius: 12px;
+            font-size: 12px;
         }
-        .card .tag:hover {
-            background: rgba(0,255,136,0.3);
-            color: #fff;
+        .tag.rated {
+            background: rgba(255,193,7,0.2);
+            color: #ffc107;
         }
-        .card .date { color: #555; }
-        
-        .btn-collect {
+        .btn-detail {
             background: transparent;
             border: 1px solid #444;
-            color: #666;
-            padding: 6px 12px;
+            color: #888;
+            padding: 6px 14px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            text-decoration: none;
+            display: inline-block;
         }
-        .btn-collect:hover {
-            border-color: #ff6b6b;
-            color: #ff6b6b;
-        }
-        .btn-collect.collected {
-            background: rgba(255,107,107,0.2);
-            border-color: #ff6b6b;
-            color: #ff6b6b;
+        .btn-detail:hover {
+            border-color: #00d9ff;
+            color: #00d9ff;
         }
         
-        .empty {
+        .history {
+            margin-top: 50px;
+        }
+        .history h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #888;
+        }
+        .history-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .history-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 20px;
             text-align: center;
-            color: #666;
-            padding: 60px 20px;
+            text-decoration: none;
+            color: #aaa;
+            transition: all 0.3s;
         }
-        .empty-icon { font-size: 48px; margin-bottom: 20px; }
+        .history-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: #00d9ff;
+        }
+        .history-date { font-size: 14px; }
+        .history-count { font-size: 12px; color: #666; margin-top: 5px; }
         
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,255,136,0.2);
-            color: #00ff88;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
+        .pending {
+            border: 1px solid rgba(255,193,7,0.3);
+            background: rgba(255,193,7,0.05);
         }
-        .toast.show { opacity: 1; }
+        .pending .tag {
+            background: rgba(255,193,7,0.2);
+            color: #ffc107;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🤖 AI Bookmarks</h1>
-        <p class="subtitle">AI 编程快讯收藏夹 | 打造个人知识库</p>
+        <h1>🛠️ AI 工具评测</h1>
+        <p class="subtitle">每日 AI 工具深度评测 | 拒绝云评测，实测才是真</p>
         
-        <input type="text" class="search-box" placeholder="搜索快讯..." id="search">
-        
-        <div class="tabs">
-            <button class="tab active" data-tab="all">全部</button>
-            <button class="tab" data-tab="feed">快讯</button>
-            <button class="tab" data-tab="favorites">❤️ 收藏</button>
+        <!-- 最新一期 -->
+        <div class="latest">
+            <div class="latest-header">
+                <span class="latest-date">📅 2026-03-16</span>
+                <span style="color:#666;font-size:14px;">第 1 期</span>
+            </div>
+            <div class="latest-title">本期收录 10 款 AI 工具</div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3><a href="2026-03-16/001.html">OpenAI GPT-4o</a></h3>
+                    <span class="tag rated">⭐ 已评测</span>
+                </div>
+                <p class="desc">多模态 AI 模型，支持文本、音频、图像实时处理</p>
+                <div class="meta">
+                    <span class="tag">LLM</span>
+                    <span class="tag">工具</span>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3><a href="2026-03-16/002.html">Cursor 0.3</a></h3>
+                    <span class="tag">待评测</span>
+                </div>
+                <p class="desc">AI 编程助手，支持全局代码库搜索</p>
+                <div class="meta">
+                    <span class="tag">编程</span>
+                    <span class="tag">工具</span>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-header">
+                    <h3><a href="2026-03-16/003.html">Windsurf</a></h3>
+                    <span class="tag">待评测</span>
+                </div>
+                <p class="desc">新型 AI 编程工具，专注开发者体验</p>
+                <div class="meta">
+                    <span class="tag">编程</span>
+                </div>
+            </div>
         </div>
         
-        <div class="tags" id="tags">
-            <button class="tag active" data-tag="all">全部</button>
-            <button class="tag" data-tag="LLM">LLM</button>
-            <button class="tag" data-tag="Tool">工具</button>
-            <button class="tag" data-tag="Code">编程</button>
-            <button class="tag" data-tag="Content">内容</button>
-            <button class="tag" data-tag="OpenSource">开源</button>
-        </div>
-        
-        <div class="bookmarks" id="bookmarks">
-            <div class="empty">
-                <div class="empty-icon">📭</div>
-                <div>暂无内容</div>
+        <!-- 历史列表 -->
+        <div class="history">
+            <h2>📚 历史期刊</h2>
+            <div class="history-list">
+                <a href="2026-03-16/" class="history-item">
+                    <div class="history-date">03-16</div>
+                    <div class="history-count">10 条</div>
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="toast" id="toast">已收藏！</div>
-
-    <script>
-        // 示例数据 - 后续对接定时任务
-        const bookmarks = [
-            {
-                id: '001',
-                title: 'OpenAI 发布 GPT-4o 新模型',
-                url: '#',
-                desc: 'GPT-4o 是 OpenAI 最新发布的多模态模型，可以处理文本、音频和图像，支持实时语音对话，性能超越现有模型。',
-                tags: ['LLM', 'News'],
-                date: '2026-03-16',
-                type: 'feed'
-            },
-            {
-                id: '002',
-                title: 'Cursor 0.3 更新：全局 AI 搜索',
-                url: '#',
-                desc: 'Cursor 推出新版本，支持全局代码库搜索和 AI 补全，编程效率大幅提升。',
-                tags: ['Tool', 'Code'],
-                date: '2026-03-15',
-                type: 'feed'
-            }
-        ];
-
-        // 从 localStorage 读取收藏
-        function getFavorites() {
-            try {
-                return JSON.parse(localStorage.getItem('ai-bookmarks-favorites') || '[]');
-            } catch { return []; }
-        }
-        
-        function saveFavorites(favs) {
-            localStorage.setItem('ai-bookmarks-favorites', JSON.stringify(favs));
-        }
-
-        // UI 元素
-        const search = document.getElementById('search');
-        const tabs = document.querySelectorAll('.tab');
-        const tags = document.querySelectorAll('.tag');
-        const container = document.getElementById('bookmarks');
-        const toast = document.getElementById('toast');
-        
-        let currentTab = 'all';
-        let currentTag = 'all';
-
-        // 渲染
-        function render() {
-            const favorites = getFavorites();
-            const q = search.value.toLowerCase();
-            
-            let filtered = bookmarks.filter(b => {
-                if (currentTab === 'favorites' && !favorites.includes(b.id)) return false;
-                if (currentTab === 'feed' && b.type !== 'feed') return false;
-                if (currentTag !== 'all' && !b.tags.includes(currentTag)) return false;
-                if (q && !b.title.toLowerCase().includes(q) && !b.desc.toLowerCase().includes(q)) return false;
-                return true;
-            });
-
-            if (!filtered.length) {
-                container.innerHTML = '<div class="empty"><div class="empty-icon">' + (currentTab === 'favorites' ? '💔' : '📭') + '</div><div>' + (currentTab === 'favorites' ? '还没有收藏' : '暂无内容') + '</div></div>';
-                return;
-            }
-
-            container.innerHTML = filtered.map(item => {
-                const collected = favorites.includes(item.id);
-                return '<div class="card"><div class="card-header"><h3><a href="' + item.url + '" target="_blank">' + item.title + '</a></h3><button class="btn-collect ' + (collected ? 'collected' : '') + '" onclick="toggleCollect(\'' + item.id + '\')">' + (collected ? '❤️ 已收藏' : '🤍 收藏') + '</button></div><p class="desc">' + item.desc + '</p><div class="meta"><span class="date">' + item.date + '</span>' + item.tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div></div>';
-            }).join('');
-        }
-
-        // 收藏切换
-        function toggleCollect(id) {
-            const favs = getFavorites();
-            const idx = favs.indexOf(id);
-            if (idx > -1) {
-                favs.splice(idx, 1);
-            } else {
-                favs.push(id);
-            }
-            saveFavorites(favs);
-            
-            toast.textContent = idx > -1 ? '已取消收藏' : '已收藏！';
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 1500);
-            
-            render();
-        }
-
-        // 事件绑定
-        search.addEventListener('input', render);
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                currentTab = tab.dataset.tab;
-                render();
-            });
-        });
-        
-        tags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                tags.forEach(t => t.classList.remove('active'));
-                tag.classList.add('active');
-                currentTag = tag.dataset.tag;
-                render();
-            });
-        });
-
-        render();
-    </script>
 </body>
 </html>
