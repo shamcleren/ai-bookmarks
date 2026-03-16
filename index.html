@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bookmarks - AI 编程快讯收藏夹</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        .search-box:focus {
+            outline: none;
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 20px rgba(0,217,255,0.3);
+        }
+        .search-box::placeholder { color: #666; }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        .tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag:hover, .tag.active {
+            background: #00d9ff;
+            color: #000;
+        }
+        .bookmarks { display: grid; gap: 15px; }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(0,217,255,0.3);
+            transform: translateY(-2px);
+        }
+        .card h3 a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+        .card h3 a:hover { text-decoration: underline; }
+        .card .desc { color: #aaa; margin: 10px 0; font-size: 14px; }
+        .card .meta { display: flex; gap: 10px; font-size: 12px; color: #666; }
+        .card .tag {
+            padding: 4px 10px;
+            font-size: 12px;
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+        }
+        .empty { text-align: center; color: #666; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Bookmarks</h1>
+        <p class="subtitle">AI 编程快讯收藏夹 | 打造个人知识库</p>
+        
+        <input type="text" class="search-box" placeholder="搜索收藏..." id="search">
+        
+        <div class="tags" id="tags">
+            <span class="tag active" data-tag="all">全部</span>
+            <span class="tag" data-tag="LLM">LLM</span>
+            <span class="tag" data-tag="Code">编程</span>
+            <span class="tag" data-tag="Tool">工具</span>
+            <span class="tag" data-tag="News">资讯</span>
+        </div>
+        
+        <div class="bookmarks" id="bookmarks">
+            <div class="empty">暂无收藏，开始添加吧！</div>
+        </div>
+    </div>
+
+    <script>
+        const bookmarks = [
+            {
+                title: 'AI 编程快讯 #001',
+                url: '#',
+                desc: 'OpenAI 发布 GPT-4o 新模型， Anthropic 发布 Claude 4...',
+                tags: ['LLM', 'News'],
+                date: '2026-03-16'
+            }
+        ];
+
+        const search = document.getElementById('search');
+        const tags = document.querySelectorAll('.tag');
+        const container = document.getElementById('bookmarks');
+        let currentTag = 'all';
+
+        function render(data) {
+            if (!data.length) {
+                container.innerHTML = '<div class="empty">暂无收藏</div>';
+                return;
+            }
+            container.innerHTML = data.map(item => `
+                <div class="card">
+                    <h3><a href="${item.url}" target="_blank">${item.title}</a></h3>
+                    <p class="desc">${item.desc}</p>
+                    <div class="meta">
+                        <span>${item.date}</span>
+                        ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filter() {
+            const q = search.value.toLowerCase();
+            const filtered = bookmarks.filter(b => {
+                const matchTag = currentTag === 'all' || b.tags.includes(currentTag);
+                const matchSearch = b.title.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q);
+                return matchTag && matchSearch;
+            });
+            render(filtered);
+        }
+
+        search.addEventListener('input', filter);
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                currentTag = tag.dataset.tag;
+                filter();
+            });
+        });
+
+        render(bookmarks);
+    </script>
+</body>
+</html>
