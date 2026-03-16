@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <script src="../calendar.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwen2.5-Max - AI 工具评测</title>
+    <title>Lies about collaborative editing - AI 工具评测</title>
+    <script src="../calendar.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #fff; padding: 40px 20px; }
@@ -12,26 +12,16 @@
         .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
         .back:hover { color: #00d9ff; }
         .header { margin-bottom: 40px; padding-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .header h1 { font-size: 2rem; margin-bottom: 12px; }
-        .header a { color: #00d9ff; text-decoration: none; }
+        .header h1 { font-size: 1.8rem; margin-bottom: 12px; }
+        .links { margin: 10px 0; }
+        .links a { color: #00d9ff; text-decoration: none; margin-right: 15px; font-size: 14px; }
+        .links a.hn { color: #ff6600; }
         .stars { color: #ffc107; font-size: 28px; letter-spacing: 4px; margin: 15px 0; }
         .tag { display: inline-block; padding: 5px 14px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 14px; font-size: 13px; margin-right: 8px; margin-bottom: 8px; }
         .section { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 25px; margin-bottom: 20px; }
         .section h2 { font-size: 1.15rem; color: #00d9ff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .feature-list { color: #ccc; line-height: 2; }
-        .feature-list li { margin-bottom: 8px; }
-        .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .pros, .cons { padding: 20px; border-radius: 10px; }
-        .pros { background: rgba(0,255,136,0.08); }
-        .cons { background: rgba(255,107,107,0.08); }
-        .pros h3 { color: #00ff88; margin-bottom: 12px; }
-        .cons h3 { color: #ff6b6b; margin-bottom: 12px; }
-        .pros li, .cons li { color: #ccc; margin-bottom: 8px; }
-        .pending { text-align: center; padding: 50px 20px; background: rgba(255,193,7,0.05); border: 1px dashed rgba(255,193,7,0.3); border-radius: 12px; margin-bottom: 20px; }
-        .pending-icon { font-size: 42px; margin-bottom: 15px; }
-        .pending h2 { color: #ffc107; border: none; padding: 0; margin-bottom: 12px; }
-        .pending p { color: #888; line-height: 1.6; }
-        @media (max-width: 600px) { .pros-cons { grid-template-columns: 1fr; } }
+        .pending { display: none; }
+        .verified { display: none; }
     </style>
 </head>
 <body>
@@ -39,33 +29,21 @@
         <a href="list.html" class="back">← 返回列表</a>
         <a href="../index.html" class="back" style="margin-left:10px;">🏠 首页</a>
         <div class="header">
-            <h1>Qwen2.5-Max</h1>
-            <div class="links"><a href="https://www.moment.dev/blog/lies-i-was-told-pt-2" target="_blank">🔗 原文</a><a href="https://news.ycombinator.com/item?id=47359712" class="hn" target="_blank">📰 HN</a></div>
-            <div class="stars">☆☆☆☆☆</div>
-            <div><span class="tag">LLM</span><span class="tag">开源</span><span class="tag">国产</span></div>
-        </div>
-        <div class="pending"><div class="pending-icon">⏳</div><h2>待评测</h2><p>该工具已加入评测队列，将在本地实机测试后发布详细评测报告。</p></div>
-        <div class="section">
-            <h2>📝 工具简介</h2>
-            <p style="color:#ccc;line-height:1.8;">Qwen2.5-Max 是阿里最新发布的大模型，在多项中文基准测试中超越 GPT-4。开源版本 Qwen2.5 也备受好评。</p>
-        </div>
-        <div class="section">
-            <h2>🚀 核心功能</h2>
-            <ul class="feature-list">
-                <li>🇨🇳 <strong>中文能力强</strong> - 中文理解和使用非常出色</li>
-                <li>📦 <strong>开源可用</strong> - 开源版本可本地部署</li>
-                <li>💰 <strong>性价比高</strong> - API 价格实惠</li>
-                <li>🔧 <strong>多尺寸可选</strong> - 从 0.5B 到 72B 多种规格</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2>👍 vs 👎 优缺点</h2>
-            <div class="pros-cons">
-                <div class="pros"><h3>👍 优点</h3><ul><li>中文能力顶尖</li><li>开源免费</li><li>性价比高</li></ul></div>
-                <div class="cons"><h3>👎 缺点</h3><ul><li>英文能力略弱</li><li>推理能力有差距</li><li>生态待完善</li></ul></div>
+            <h1>Lies about collaborative editing</h1>
+            <div class="links">
+                <a href="https://www.moment.dev/blog/lies-i-was-told-pt-2" target="_blank">🔗 原文</a>
+                <a href="https://news.ycombinator.com/item?id=47359712" class="hn" target="_blank">📰 HN讨论</a>
             </div>
+            <div class="stars">☆☆☆☆☆</div>
+            <div><span class="tag">协作</span><span class="tag">编辑</span><span class="tag">技术</span></div>
         </div>
-        <div class="section"><h2>💰 定价</h2><p style="color:#ccc;line-height:1.8;">API: ¥0.001/千tokens 起</p></div>
+        
+        
+        
+        <div class="section">
+            <h2>📝 简介</h2>
+            <p style="color:#ccc;line-height:1.8;">作者揭露了协同编辑领域的常见误区，第二篇关于为什么不用 Yjs</p>
+        </div>
     </div>
 </body>
 </html>
