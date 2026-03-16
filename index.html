@@ -166,7 +166,7 @@
                 let html = '<div class="latest-header"><span class="latest-date">📅 ' + data.date + '</span><span style="color:#666;font-size:13px;">第 ' + data.issue + ' 期</span></div>';
                 html += '<div class="latest-title">本期收录 ' + data.tools.length + ' 款 AI 工具 <span style="color:#ffc107;font-size:14px;">(' + rated + ' 已评测)</span></div>';
                 
-                html += data.tools.slice(0, 3).map(t => {
+                html += data.tools.slice(0, 10).map(t => {
                     const statusTag = t.status === 'rated' 
                         ? '<span class="tag rated">⭐ 已评测</span>' 
                         : '<span class="tag pending">待评测</span>';

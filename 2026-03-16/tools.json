@@ -5,7 +5,7 @@
     {
       "id": "001",
       "name": "Claude 4 (Sonnet & Opus)",
-      "url": "https://www.anthropic.com/claude",
+      "url": "https://www.anthropic.com/claude/sonnet-4",
       "desc": "Anthropic 最新发布的 Claude 4 模型，编程能力大幅提升，Opus 版本在多项基准测试中超越 GPT-4o",
       "tags": ["LLM", "编程", "官方"],
       "canTest": true,
@@ -19,7 +19,7 @@
     {
       "id": "002",
       "name": "Gemini 2.5 Pro",
-      "url": "https://gemini.google.com/app",
+      "url": "https://aistudio.google.com/app",
       "desc": "Google 最新大模型，推理能力大幅提升，在 LMArena 排行榜位居前列，支持超长上下文",
       "tags": ["LLM", "官方", "长上下文"],
       "canTest": true,
@@ -47,7 +47,7 @@
     {
       "id": "004",
       "name": "Windsurf (Codex)",
-      "url": "https://windsurf.ai",
+      "url": "https://codex.windsurf.com",
       "desc": "新型 AI 编程工具，由前 Stripe 工程师创立，专注开发者工作流自动化",
       "tags": ["编程", "IDE", "初创"],
       "canTest": true,
@@ -61,7 +61,7 @@
     {
       "id": "005",
       "name": "OpenAI o3/o4-mini",
-      "url": "https://openai.com/index/new-models/",
+      "url": "https://chatgpt.com",
       "desc": "OpenAI 最新推理模型，o3 在数学和编程基准测试中创下新纪录，o4-mini 更注重效率",
       "tags": ["LLM", "推理", "官方"],
       "canTest": true,
@@ -75,7 +75,7 @@
     {
       "id": "006",
       "name": "Perplexity Pro",
-      "url": "https://perplexity.ai/pro",
+      "url": "https://www.perplexity.ai",
       "desc": "AI 搜索引擎，新增 Pro 订阅，学术搜索和文件分析能力更强，直接挑战 Google",
       "tags": ["搜索", "AI助手", "学术"],
       "canTest": false,
@@ -88,10 +88,10 @@
     },
     {
       "id": "007",
-      "name": "GitHub Copilot Workspace",
+      "name": "GitHub Copilot",
       "url": "https://github.com/features/copilot",
-      "desc": "GitHub 推出的 AI 编程代理，可以根据任务描述自动生成代码和 PR",
-      "tags": ["编程", "GitHub", "AI代理"],
+      "desc": "GitHub 推出的 AI 编程助手，可以根据代码上下文自动补全和建议",
+      "tags": ["编程", "GitHub", "AI助手"],
       "canTest": true,
       "status": "pending",
       "easeScore": 0,
@@ -103,7 +103,7 @@
     {
       "id": "008",
       "name": "Qwen2.5-Max",
-      "url": "https://tongyi.aliyun.com",
+      "url": "https://www.qwenlm.ai",
       "desc": "阿里最新大模型，在多项中文基准测试中超越 GPT-4，开源版本 Qwen2.5 也备受好评",
       "tags": ["LLM", "开源", "国产"],
       "canTest": true,
@@ -131,7 +131,7 @@
     {
       "id": "010",
       "name": "Devin (Cognition Labs)",
-      "url": "https://devin.ai",
+      "url": "https://docs.devin.ai",
       "desc": "AI 软件工程师，可以独立完成开发任务，包括写代码、调试和部署",
       "tags": ["编程", "AI代理", "初创"],
       "canTest": false,
