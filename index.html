@@ -40,24 +40,51 @@
         }
         .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
         
-        .date-picker {
-            text-align: center;
+        .calendar {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
             margin-bottom: 30px;
+        }
+        .calendar-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 20px;
         }
-        .date-picker span { color: #888; }
-        .date-picker select {
-            padding: 10px 15px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+        .calendar-header h3 { color: #00d9ff; font-size: 16px; }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .calendar-day {
+            text-align: center;
+            padding: 10px 5px;
             border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
             cursor: pointer;
+            transition: all 0.3s;
+            font-size: 13px;
         }
+        .calendar-day:hover {
+            background: rgba(0,217,255,0.2);
+            color: #00d9ff;
+        }
+        .calendar-day.header {
+            color: #666;
+            font-size: 12px;
+            cursor: default;
+        }
+        .calendar-day.header:hover { background: transparent; }
+        .calendar-day.has-data {
+            background: rgba(0,255,136,0.15);
+            color: #00ff88;
+        }
+        .calendar-day.has-data:hover {
+            background: rgba(0,255,136,0.3);
+        }
+        .calendar-day.empty { cursor: default; }
+        .calendar-day.empty:hover { background: transparent; }
         
         .latest {
             background: rgba(0,217,255,0.08);
@@ -117,31 +144,6 @@
         .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; }
         .badge-test { background: rgba(138,43,226,0.2); color: #b366ff; }
         
-        .history {
-            margin-top: 50px;
-        }
-        .history h2 { font-size: 1.3rem; margin-bottom: 20px; color: #888; }
-        .history-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-        }
-        .history-item {
-            background: rgba(255,255,255,0.04);
-            border-radius: 10px;
-            padding: 18px;
-            text-align: center;
-            text-decoration: none;
-            color: #888;
-            transition: all 0.3s;
-        }
-        .history-item:hover {
-            background: rgba(255,255,255,0.1);
-            color: #00d9ff;
-        }
-        .history-date { font-size: 14px; }
-        .history-count { font-size: 12px; color: #666; margin-top: 5px; }
-        
         .loading { text-align: center; color: #666; padding: 40px; }
     </style>
 </head>
@@ -155,32 +157,50 @@
             <a href="rank.html">🏆 榜单</a>
         </div>
         
-        <div class="date-picker">
-            <span>📅 选择日期:</span>
-            <select id="dateSelect" onchange="if(this.value)window.location.href=this.value">
-                <option value="">请选择日期</option>
-                <option value="2026-03-16/list.html">2026-03-16 (10条)</option>
-            </select>
+        <!-- 日历选择器 -->
+        <div class="calendar">
+            <div class="calendar-header">
+                <h3>📅 选择日期</h3>
+            </div>
+            <div class="calendar-grid" id="calendar"></div>
         </div>
         
         <div class="latest" id="latest">
             <div class="loading">加载中...</div>
         </div>
-        
-        <div class="history">
-            <h2>📚 历史期刊</h2>
-            <div class="history-list" id="historyList"></div>
-        </div>
     </div>
 
     <script>
-        const historyData = [
-            { date: '2026-03-16', count: 10 }
-        ];
+        const datesWithData = ['2026-03-16'];
         
-        document.getElementById('historyList').innerHTML = historyData.map(h => 
-            '<a href="' + h.date + '/list.html" class="history-item"><div class="history-date">' + h.date.slice(5) + '</div><div class="history-count">' + h.count + ' 条</div></a>'
-        ).join('');
+        function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            const year = 2026;
+            const month = 2; // March (0-indexed)
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const headers = ['日', '一', '二', '三', '四', '五', '六'];
+            let html = headers.map(h => '<div class="calendar-day header">' + h + '</div>').join('');
+            
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                html += '<div class="calendar-day empty"></div>';
+            }
+            
+            // Days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = '2026-03-' + (day < 10 ? '0' + day : day);
+                const hasData = datesWithData.includes(dateStr);
+                const isToday = day === 16;
+                
+                html += '<div class="calendar-day' + (hasData ? ' has-data' : '') + (isToday ? '" style="border:1px solid #00d9ff;"' : '') + '"' + 
+                    (hasData ? ' onclick="window.location.href=\'' + dateStr + '/list.html\'"' : '') + '>' + day + '</div>';
+            }
+            
+            calendar.innerHTML = html;
+        }
         
         fetch('2026-03-16/tools.json')
             .then(r => r.json())
@@ -206,6 +226,8 @@
             .catch(e => {
                 document.getElementById('latest').innerHTML = '<div class="loading">暂无数据</div>';
             });
+        
+        renderCalendar();
     </script>
 </body>
 </html>
