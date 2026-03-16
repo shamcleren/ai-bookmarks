@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 工具评测 - 每日 AI 工具深度评测</title>
+    <script src="calendar.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -28,7 +29,7 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         .nav a {
             color: #888;
@@ -39,52 +40,6 @@
             font-size: 15px;
         }
         .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
-        
-        .calendar {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .calendar-header h3 { color: #00d9ff; font-size: 16px; }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-        }
-        .calendar-day {
-            text-align: center;
-            padding: 10px 5px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 13px;
-        }
-        .calendar-day:hover {
-            background: rgba(0,217,255,0.2);
-            color: #00d9ff;
-        }
-        .calendar-day.header {
-            color: #666;
-            font-size: 12px;
-            cursor: default;
-        }
-        .calendar-day.header:hover { background: transparent; }
-        .calendar-day.has-data {
-            background: rgba(0,255,136,0.15);
-            color: #00ff88;
-        }
-        .calendar-day.has-data:hover {
-            background: rgba(0,255,136,0.3);
-        }
-        .calendar-day.empty { cursor: default; }
-        .calendar-day.empty:hover { background: transparent; }
         
         .latest {
             background: rgba(0,217,255,0.08);
@@ -157,51 +112,12 @@
             <a href="rank.html">🏆 榜单</a>
         </div>
         
-        <!-- 日历选择器 -->
-        <div class="calendar">
-            <div class="calendar-header">
-                <h3>📅 选择日期</h3>
-            </div>
-            <div class="calendar-grid" id="calendar"></div>
-        </div>
-        
         <div class="latest" id="latest">
             <div class="loading">加载中...</div>
         </div>
     </div>
 
     <script>
-        const datesWithData = ['2026-03-16'];
-        
-        function renderCalendar() {
-            const calendar = document.getElementById('calendar');
-            const year = 2026;
-            const month = 2; // March (0-indexed)
-            
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            const headers = ['日', '一', '二', '三', '四', '五', '六'];
-            let html = headers.map(h => '<div class="calendar-day header">' + h + '</div>').join('');
-            
-            // Empty cells before first day
-            for (let i = 0; i < firstDay; i++) {
-                html += '<div class="calendar-day empty"></div>';
-            }
-            
-            // Days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = '2026-03-' + (day < 10 ? '0' + day : day);
-                const hasData = datesWithData.includes(dateStr);
-                const isToday = day === 16;
-                
-                html += '<div class="calendar-day' + (hasData ? ' has-data' : '') + (isToday ? '" style="border:1px solid #00d9ff;"' : '') + '"' + 
-                    (hasData ? ' onclick="window.location.href=\'' + dateStr + '/list.html\'"' : '') + '>' + day + '</div>';
-            }
-            
-            calendar.innerHTML = html;
-        }
-        
         fetch('2026-03-16/tools.json')
             .then(r => r.json())
             .then(data => {
@@ -226,8 +142,6 @@
             .catch(e => {
                 document.getElementById('latest').innerHTML = '<div class="loading">暂无数据</div>';
             });
-        
-        renderCalendar();
     </script>
 </body>
 </html>
