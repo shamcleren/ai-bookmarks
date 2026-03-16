@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-03-16 AI 工具列表 - AI 工具评测</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
+        .back:hover { color: #00d9ff; }
+        
+        h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { color: #888; margin-bottom: 30px; }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
+        
+        .item {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        .item:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(0,217,255,0.2);
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .item h3 { font-size: 17px; }
+        .item h3 a { color: #00d9ff; text-decoration: none; }
+        .item h3 a:hover { text-decoration: underline; }
+        .item .desc { color: #999; font-size: 14px; line-height: 1.6; margin: 10px 0; }
+        .item .meta { display: flex; gap: 10px; font-size: 12px; margin-top: 12px; flex-wrap: wrap; }
+        
+        .tag { padding: 4px 12px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 12px; font-size: 12px; }
+        .tag.rated { background: rgba(255,193,7,0.15); color: #ffc107; }
+        .tag.pending { background: rgba(100,100,100,0.2); color: #888; }
+        
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+        .badge-test { background: rgba(138,43,226,0.2); color: #b366ff; }
+        .badge-untest { background: rgba(100,100,100,0.2); color: #666; }
+        
+        .btn-detail {
+            display: inline-block;
+            margin-top: 12px;
+            color: #00d9ff;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .btn-detail:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back">← 返回首页</a>
+        
+        <h1>📅 2026-03-16</h1>
+        <p class="subtitle">本期收录 10 款 AI 工具</p>
+        
+        <div class="nav">
+            <a href="../index.html">🏠 首页</a>
+            <a href="../rank.html">🏆 榜单</a>
+        </div>
+        
+        <div id="list"></div>
+    </div>
+
+    <script>
+        fetch('tools.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('list').innerHTML = data.tools.map(t => {
+                    const statusTag = t.status === 'rated' 
+                        ? '<span class="tag rated">⭐ 已评测</span>' 
+                        : '<span class="tag pending">待评测</span>';
+                    const testBadge = t.canTest 
+                        ? '<span class="badge badge-test">🤖 可 AI 评测</span>' 
+                        : '<span class="badge badge-untest">⏳ 暂不支持</span>';
+                    
+                    return '<div class="item"><div class="item-header"><h3><a href="' + t.id + '.html" target="_blank">' + t.name + '</a></h3>' + statusTag + '</div><p class="desc">' + t.desc + '</p><div class="meta">' + t.tags.map(tag => '<span class="tag">' + tag + '</span>').join('') + testBadge + '</div><a href="' + t.id + '.html" class="btn-detail">查看详情 →</a></div>';
+                }).join('');
+            });
+    </script>
+</body>
+</html>

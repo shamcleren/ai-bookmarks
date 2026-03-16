@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI GPT-4o - AI 工具评测</title>
+    <title>GPT-4o - AI 工具评测</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -14,110 +14,93 @@
             padding: 40px 20px;
         }
         .container { max-width: 800px; margin: 0 auto; }
-        .back {
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
+        .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
         .back:hover { color: #00d9ff; }
         
-        .header {
-            margin-bottom: 40px;
-        }
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-        .header a {
-            color: #00d9ff;
-            text-decoration: none;
-        }
+        .header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .header h1 { font-size: 2rem; margin-bottom: 10px; }
+        .header a { color: #00d9ff; text-decoration: none; }
         .header a:hover { text-decoration: underline; }
         
-        .stars {
-            color: #ffc107;
-            font-size: 24px;
-            margin: 15px 0;
+        .stars { color: #ffc107; font-size: 28px; letter-spacing: 4px; margin: 15px 0; }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(0,255,136,0.12);
+            color: #00ff88;
+            border-radius: 14px;
+            font-size: 13px;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
         
         .section {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 20px;
         }
         .section h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #00d9ff;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         
         .score-row {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            align-items: center;
+            padding: 14px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .score-row:last-child { border: none; }
-        .score-label { color: #aaa; }
-        .score-value { 
-            color: #00ff88;
-            font-weight: 600;
-        }
+        .score-label { color: #aaa; font-size: 15px; }
+        .score-value { font-weight: 600; font-size: 16px; }
+        .score-good { color: #00ff88; }
+        .score-mid { color: #ffc107; }
+        .score-bad { color: #ff6b6b; }
+        
         .score-bar {
-            width: 120px;
-            height: 8px;
+            width: 140px;
+            height: 10px;
             background: rgba(255,255,255,0.1);
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
             display: inline-block;
-            margin-left: 10px;
+            margin-left: 15px;
+            vertical-align: middle;
         }
         .score-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00d9ff, #00ff88);
-            border-radius: 4px;
+            border-radius: 5px;
+            transition: width 0.5s;
         }
         
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(0,255,136,0.15);
-            color: #00ff88;
-            border-radius: 12px;
-            font-size: 12px;
-            margin-right: 8px;
-        }
-        
-        .verdict {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #ddd;
-        }
+        .verdict { font-size: 15px; line-height: 1.9; color: #ddd; }
         
         .pending {
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
             background: rgba(255,193,7,0.05);
             border: 1px dashed rgba(255,193,7,0.3);
             border-radius: 12px;
         }
-        .pending-icon { font-size: 48px; margin-bottom: 20px; }
-        .pending h2 { color: #ffc107; border: none; }
+        .pending-icon { font-size: 42px; margin-bottom: 15px; }
+        .pending h2 { color: #ffc107; border: none; padding: 0; margin-bottom: 12px; }
+        .pending p { color: #888; line-height: 1.6; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back">← 返回首页</a>
+        <a href="./list.html" class="back">← 返回列表</a>
         
         <div class="header">
-            <h1>OpenAI GPT-4o</h1>
+            <h1>GPT-4o</h1>
             <a href="https://openai.com/index/gpt-4o/" target="_blank">访问官网 →</a>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <div class="stars">☆☆☆☆☆</div>
             <div>
                 <span class="tag">LLM</span>
                 <span class="tag">多模态</span>
@@ -125,42 +108,35 @@
             </div>
         </div>
         
-        <div class="section">
-            <h2>📝 简介</h2>
-            <p>GPT-4o 是 OpenAI 最新发布的多模态大模型，可以实时处理文本、音频和图像输入，支持实时语音对话，比现有模型更快更强。</p>
+        <div class="pending">
+            <div class="pending-icon">⏳</div>
+            <h2>待评测</h2>
+            <p>该工具已加入评测队列，将在本地实机测试后发布详细评测报告。<br>评测维度：易用性、实用性、是否夸大、推荐星级</p>
         </div>
         
         <div class="section">
-            <h2>📊 评测数据</h2>
+            <h2>📝 简介</h2>
+            <p style="color:#ccc;line-height:1.7;">OpenAI 最新发布的多模态大模型，可以实时处理文本、音频和图像输入，支持实时语音对话，比现有模型更快更强。GPT-4o 中的"o"代表"omni"，意为"全能"。</p>
+        </div>
+        
+        <div class="section">
+            <h2>🎯 评测维度（待测试）</h2>
             <div class="score-row">
                 <span class="score-label">易用性</span>
-                <span><span class="score-value">9.0</span><span class="score-bar"><span class="score-bar-fill" style="width:90%"></span></span></span>
+                <span><span class="score-value">-</span></span>
             </div>
             <div class="score-row">
                 <span class="score-label">实用性</span>
-                <span><span class="score-value">9.5</span><span class="score-bar"><span class="score-bar-fill" style="width:95%"></span></span></span>
+                <span><span class="score-value">-</span></span>
             </div>
             <div class="score-row">
                 <span class="score-label">是否夸大</span>
-                <span><span class="score-value">无夸大</span></span>
+                <span><span class="score-value">-</span></span>
             </div>
             <div class="score-row">
                 <span class="score-label">推荐指数</span>
-                <span><span class="score-value">⭐⭐⭐⭐⭐</span></span>
+                <span><span class="score-value">-</span></span>
             </div>
-        </div>
-        
-        <div class="section">
-            <h2>💡 评测结论</h2>
-            <p class="verdict">
-                GPT-4o 确实展现了多模态方面的突破，实时语音对话体验流畅，延迟极低。图像理解能力显著提升，对中文支持良好。唯一的缺点是免费版有调用限制，但付费版性价比依然很高。适合所有层次的 AI 用户。
-            </p>
-        </div>
-        
-        <div class="section">
-            <h2>🎬 内容建议</h2>
-            <p>可做成"实测 GPT-4o 语音对话"短视频，展示与 AI 实时对话、让它唱歌、讲故事等场景，视觉效果好，易于吸引观众。
-            </p>
         </div>
     </div>
 </body>
