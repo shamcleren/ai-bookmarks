@@ -1,6 +1,6 @@
 // 全局日历组件
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(initCalendar, 500);
+    setTimeout(initCalendar, 1500);
 });
 
 function initCalendar() {
