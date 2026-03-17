@@ -20,6 +20,10 @@
         .tag { display: inline-block; padding: 5px 14px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 14px; font-size: 13px; margin-right: 8px; margin-bottom: 8px; }
         .section { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 25px; margin-bottom: 20px; }
         .section h2 { font-size: 1.15rem; color: #00d9ff; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .section p { color: #ccc; line-height: 1.8; margin-bottom: 15px; }
+        .section ul { color: #ccc; line-height: 1.9; margin-left: 20px; margin-bottom: 15px; }
+        .section li { margin-bottom: 8px; }
+        .highlight { background: rgba(0,217,255,0.1); padding: 2px 6px; border-radius: 4px; color: #00d9ff; }
         .pending { display: none; }
         .verified { display: none; }
     </style>
@@ -34,15 +38,67 @@
                 <a href="https://www.stavros.io/posts/how-i-write-software-with-llms/" target="_blank">🔗 原文</a>
                 <a href="https://news.ycombinator.com/item?id=47394022" class="hn" target="_blank">📰 HN讨论</a>
             </div>
-            <div class="stars">☆☆☆☆☆</div>
+            <div class="stars">★★★★☆</div>
             <div><span class="tag">LLM</span><span class="tag">编程</span><span class="tag">经验</span></div>
         </div>
         
-        
-        
         <div class="section">
             <h2>📝 简介</h2>
-            <p style="color:#ccc;line-height:1.8;">作者分享了他日常使用 LLM 写代码的实战经验，包括最佳实践和踩坑总结</p>
+            <p>作者 Stavros 分享了他日常使用 LLM 写代码的实战经验，包括最佳实践和踩坑总结。这篇文章详细描述了他如何使用 AI 辅助编程，包括使用的工具、工作流程、以及真实案例。</p>
+        </div>
+        
+        <div class="section">
+            <h2>🎯 核心观点</h2>
+            <ul>
+                <li>LLM 可以显著降低代码缺陷率，甚至低于手写代码</li>
+                <li>工程师的技能从"写正确代码"转变为"正确架构系统"</li>
+                <li>不同人使用 LLM 的结果差异很大，<span class="highlight">对话方式</span>很重要</li>
+                <li>代码审查粒度在变化：从逐行 → 函数级 → 架构级</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>🛠️ 他用 LLM 构建的项目</h2>
+            <ul>
+                <li><strong>Stavrobot</strong> - 一个注重安全的 AI 助手（类似 OpenClaw）</li>
+                <li><strong>Middle</strong> - 语音备忘录 pendant硬件 + 转录</li>
+                <li><strong>Sleight of Hand</strong> - 艺术作品：不规则跳动的时钟</li>
+                <li><strong>Pine Town</strong> - 多人在线绘画画布</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>⚙️ 工作流程</h2>
+            <p>作者使用 <span class="highlight">OpenCode</span> 作为开发框架，采用"架构师-开发者-评审"三人协作模式：</p>
+            <ul>
+                <li><strong>架构师</strong>（Opus 4.6）- 只与人交互，制定详细计划</li>
+                <li><strong>开发者</strong>（Sonnet 4.6）- 根据计划实现代码</li>
+                <li><strong>评审</strong>（多模型）- Codex/Gemini/Opus 独立评审</li>
+            </ul>
+            <p>关键点：必须说 "approved" 才会开始执行</p>
+        </div>
+        
+        <div class="section">
+            <h2>💡 关键经验</h2>
+            <ul>
+                <li>使用<strong>多模型</strong> - 不同模型有不同优缺点，组合使用效果最佳</li>
+                <li>有数据的日期才能点击 - 无数据的日期显示为灰色</li>
+                <li>agent 需要<strong>相互调用</strong> - 避免繁琐的信息传递</li>
+                <li>skill 文件<strong>手写</strong> - 让 LLM 写指令效果不好</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>⚠️ 失败模式</h2>
+            <p>当你对底层技术不够熟悉时，无法 catch LLM 的错误决策，导致在错误基础上越堆越多，最终无法收拾。</p>
+            <p>解决：规划阶段尽量理解技术细节，好好引导 LLM</p>
+        </div>
+        
+        <div class="section">
+            <h2>📊 评测</h2>
+            <p><strong>推荐程度：★★★★☆</strong></p>
+            <p>这是一篇非常实用的 LLM 编程实践指南，作者分享了真实的工作流程和踩坑经验。对于想用 AI 辅助编程的开发者来说，价值很高。</p>
+            <p>亮点：包含真实编码会话示例，详细展示了整个开发过程。</p>
         </div>
     </div>
 </body>
