@@ -15,12 +15,12 @@
         "经验"
       ],
       "canTest": true,
-      "status": "pending",
-      "easeScore": 0,
-      "usefulScore": 0,
-      "hypeScore": 0,
-      "stars": 0,
-      "verdict": ""
+      "status": "rated",
+      "easeScore": 8,
+      "usefulScore": 9,
+      "hypeScore": 3,
+      "stars": 4,
+      "verdict": "非常实用的 LLM 编程实践指南，适合想把 AI 真正纳入开发流程的工程师。"
     },
     {
       "id": "002",

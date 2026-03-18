@@ -141,19 +141,42 @@
 
     <script>
         let allTools = [];
-        
-        // 加载所有日期的数据
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, function(char) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[char];
+            });
+        }
+
         async function loadData() {
             try {
-                const res = await fetch('2026-03-16/tools.json');
-                const data = await res.json();
-                allTools = data.tools.filter(t => t.status === 'rated');
+                const datesResponse = await fetch('available-dates.json');
+                const datesData = await datesResponse.json();
+                const dates = (datesData.dates || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+
+                const results = await Promise.all(dates.map(async function(entry) {
+                    const response = await fetch(entry.date + '/tools.json');
+                    const data = await response.json();
+                    return data.tools
+                        .filter(function(tool) { return tool.status === 'rated'; })
+                        .map(function(tool) {
+                            return Object.assign({ date: data.date }, tool);
+                        });
+                }));
+
+                allTools = results.flat();
                 render();
-            } catch(e) {
+            } catch (error) {
                 console.log('No data yet');
             }
         }
-        
+
         function getRankClass(idx) {
             if (idx === 0) return 'gold';
             if (idx === 1) return 'silver';
@@ -163,12 +186,12 @@
 
         function render() {
             const rankList = document.getElementById('rankList');
-            
+
             if (!allTools.length) {
                 rankList.innerHTML = '<div class="empty">暂无评测数据<br><small>评测完成后自动上榜</small></div>';
                 return;
             }
-            
+
             let sorted = [...allTools];
             if (currentSort === 'stars') {
                 sorted.sort((a, b) => b.stars - a.stars);
@@ -177,23 +200,27 @@
             } else if (currentSort === 'useful') {
                 sorted.sort((a, b) => b.usefulScore - a.usefulScore);
             } else if (currentSort === 'hype') {
-                sorted.sort((a, b) => a.hypeScore - b.hypeScore); // 低分防坑
+                sorted.sort((a, b) => a.hypeScore - b.hypeScore);
             }
 
-            rankList.innerHTML = sorted.map((t, idx) => {
+            rankList.innerHTML = sorted.map((tool, idx) => {
                 const numClass = getRankClass(idx);
-                const stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
-                const score = currentSort === 'stars' ? t.stars + '.0' : 
-                              currentSort === 'ease' ? t.easeScore : 
-                              currentSort === 'useful' ? t.usefulScore : t.hypeScore + '/10';
-                
-                return '<div class="rank-item"><div class="rank-num ' + numClass + '">' + (idx + 1) + '</div><div class="rank-content"><h3><a href="2026-03-16/' + t.id + '.html">' + t.name + '</a></h3><p class="desc">' + t.desc + '</p><div class="meta"><span class="stars">' + stars + '</span>' + t.tags.map(tag => '<span class="tag">' + tag + '</span>').join('') + '</div></div><div class="score-badge">' + score + '</div></div>';
+                const stars = '★'.repeat(tool.stars) + '☆'.repeat(5 - tool.stars);
+                const score = currentSort === 'stars'
+                    ? tool.stars + '.0'
+                    : currentSort === 'ease'
+                        ? tool.easeScore
+                        : currentSort === 'useful'
+                            ? tool.usefulScore
+                            : tool.hypeScore + '/10';
+
+                return '<div class="rank-item"><div class="rank-num ' + numClass + '">' + (idx + 1) + '</div><div class="rank-content"><h3><a href="' + encodeURI(tool.date) + '/' + encodeURIComponent(tool.id) + '.html">' + escapeHtml(tool.name) + '</a></h3><p class="desc">' + escapeHtml(tool.desc) + '</p><div class="meta"><span class="stars">' + stars + '</span>' + tool.tags.map(function(tag) { return '<span class="tag">' + escapeHtml(tag) + '</span>'; }).join('') + '</div></div><div class="score-badge">' + score + '</div></div>';
             }).join('');
         }
 
         const tabs = document.querySelectorAll('.tab');
         let currentSort = 'stars';
-        
+
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));

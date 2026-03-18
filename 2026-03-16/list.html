@@ -88,7 +88,7 @@
         
         <div class="nav">
             <a href="../index.html">🏠 首页</a>
-            <a href="javascript:void(0)" onclick="if(window.showCalendarModal)window.showCalendarModal()">📅 日历</a>
+            <a href="#" data-open-calendar>📅 日历</a>
             <a href="../rank.html">🏆 榜单</a>
         </div>
         
@@ -96,18 +96,30 @@
     </div>
 
     <script>
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, function(char) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[char];
+            });
+        }
+
         fetch('tools.json')
             .then(r => r.json())
             .then(data => {
                 document.getElementById('list').innerHTML = data.tools.map(t => {
-                    const statusTag = t.status === 'rated' 
-                        ? '<span class="tag rated">⭐ 已评测</span>' 
+                    const statusTag = t.status === 'rated'
+                        ? '<span class="tag rated">⭐ 已评测</span>'
                         : '<span class="tag pending">待评测</span>';
-                    const testBadge = t.canTest 
-                        ? '<span class="badge badge-test">🤖 可 AI 评测</span>' 
+                    const testBadge = t.canTest
+                        ? '<span class="badge badge-test">🤖 可 AI 评测</span>'
                         : '<span class="badge badge-untest">⏳ 暂不支持</span>';
-                    
-                    return '<div class="item"><div class="item-header"><h3><a href="' + t.id + '.html" target="_blank">' + t.name + '</a></h3>' + statusTag + '</div><p class="desc">' + t.desc + '</p><div class="meta">' + t.tags.map(tag => '<span class="tag">' + tag + '</span>').join('') + testBadge + '</div><a href="' + t.id + '.html" class="btn-detail">查看详情 →</a></div>';
+
+                    return '<div class="item"><div class="item-header"><h3><a href="' + encodeURIComponent(t.id) + '.html" target="_blank">' + escapeHtml(t.name) + '</a></h3>' + statusTag + '</div><p class="desc">' + escapeHtml(t.desc) + '</p><div class="meta">' + t.tags.map(tag => '<span class="tag">' + escapeHtml(tag) + '</span>').join('') + testBadge + '</div><a href="' + encodeURIComponent(t.id) + '.html" class="btn-detail">查看详情 →</a></div>';
                 }).join('');
             });
     </script>
