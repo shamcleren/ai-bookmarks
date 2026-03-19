@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script src="../calendar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-03-19 AI 工具列表 - AI 工具评测</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #fff; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
+        .back:hover { color: #00d9ff; }
+        h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { color: #888; margin-bottom: 30px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+        .nav a { color: #888; text-decoration: none; padding: 12px 24px; border-radius: 10px; transition: all 0.3s; }
+        .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
+        .item { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 20px; margin-bottom: 12px; transition: all 0.3s; border: 1px solid transparent; }
+        .item:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,217,255,0.2); }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .item h3 { font-size: 17px; }
+        .item h3 a { color: #00d9ff; text-decoration: none; }
+        .item h3 a:hover { text-decoration: underline; }
+        .item .desc { color: #999; font-size: 14px; line-height: 1.6; margin: 10px 0; }
+        .item .meta { display: flex; gap: 10px; font-size: 12px; margin-top: 12px; flex-wrap: wrap; }
+        .tag { padding: 4px 12px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 12px; font-size: 12px; }
+        .tag.rated { background: rgba(255,193,7,0.15); color: #ffc107; }
+        .tag.pending { background: rgba(100,100,100,0.2); color: #888; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+        .badge-test { background: rgba(138,43,226,0.2); color: #b366ff; }
+        .badge-untest { background: rgba(100,100,100,0.2); color: #666; }
+        .btn-detail { display: inline-block; margin-top: 12px; color: #00d9ff; text-decoration: none; font-size: 13px; }
+        .btn-detail:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back">← 返回首页</a>
+        <h1>📅 2026-03-19</h1>
+        <p class="subtitle">本期收录 10 款 AI 工具</p>
+        <div class="nav">
+            <a href="../index.html">🏠 首页</a>
+            <a href="#" data-open-calendar>📅 日历</a>
+            <a href="../rank.html">🏆 榜单</a>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script>
+        fetch('tools.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('list').innerHTML = "<div class=\"item\"><div class=\"item-header\"><h3><a href=\"001.html\" target=\"_blank\">Superpowers — 编程智能体技能框架</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一款让 AI 编程助手变身高水平工程师的框架。安装后，智能体不再是上来就写代码，而是先反问你真正想做什么、一起打磨设计、制定计划，再通过子智能体分工执行任务。支持 Claude Code、Cursor、Codex、OpenCode、Gemini CLI 等所有主流 AI 编程工具。96k GitHub Stars，4089 颗今天新增。对程序员：直接装上，AI 编程助手立刻变专业。内容角度：&quot;AI 编程框架&quot;赛道热门，4k star/天增速惊人。</p><div class=\"meta\"><span class=\"tag\">AI编程框架</span><span class=\"tag\">Claude</span><span class=\"tag\">Cursor</span><span class=\"tag\">Agent</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"001.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"002.html\" target=\"_blank\">Claude HUD — Claude Code 状态可视化插件</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Claude Code 的实时状态栏 HUD，能显示上下文使用量（Token 条）、当前调用的工具（Read/Edit/Grep 次数）、子智能体运行状态、Todo 进度。直接在终端底部渲染，无需 tmux 分屏。对程序员：编程时清楚知道 Claude 消耗了多少上下文、在干什么。内容角度：Claude Code 用户极多，&quot;可视化调试 AI 行为&quot;是个有趣的角度。</p><div class=\"meta\"><span class=\"tag\">Claude Code</span><span class=\"tag\">插件</span><span class=\"tag\">开发工具</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"002.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"003.html\" target=\"_blank\">Open SWE — LangChain 开源编程智能体框架</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">LangChain 开源的企业内部编程智能体框架，参考了 Stripe、Ramp、Coinbase 的内部实践。特点：云端沙箱隔离环境 + Slack/Linear 调用 + 自动开 PR + 子智能体并行分工。对程序员：可以基于它搭建自己公司的代码审查、修复、发布自动化。内容角度：&quot;AI 编程自动化&quot;赛道核心项目，LangChain 背书，社群活跃。</p><div class=\"meta\"><span class=\"tag\">AI编程框架</span><span class=\"tag\">LangChain</span><span class=\"tag\">沙箱</span><span class=\"tag\">自动化</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"003.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"004.html\" target=\"_blank\">LLM Circuit Finder — 复制3层让LLM推理暴涨</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">无需重新训练、无需改权重，只需在模型前向传播时把特定的几层复制一份，逻辑推理从 0.22 暴涨到 0.76（+245%）！Devstral-24B 复制第 12-14 层，Qwen2.5-32B 复制第 7-9 层。作者用两张 AMD 显卡一晚上跑出来的。对程序员：理论上可以把自己的 GGUF 模型文件做一个小改动，立即变强。内容角度：&quot;LLM 黑科技&quot;极客向，内容容易做视觉冲击，短视频友好。</p><div class=\"meta\"><span class=\"tag\">LLM</span><span class=\"tag\">推理优化</span><span class=\"tag\">开源</span><span class=\"tag\">极客</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"004.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"005.html\" target=\"_blank\">Unsloth — 本地训练和运行开源大模型</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一个统一 Web UI，可在本地训练和运行 Qwen、DeepSeek、gpt-oss、Gemma 等开源模型。支持 Vulkan 加速，显存占用更低。55k GitHub Stars，今天又涨了 1005 颗。对程序员：本地微调自己的垂直模型、用更低配置跑大模型，比 Ollama 更专注训练环节。内容角度：&quot;本地大模型&quot;一直是热门话题，UI 直观适合演示。</p><div class=\"meta\"><span class=\"tag\">本地LLM</span><span class=\"tag\">模型训练</span><span class=\"tag\">Web UI</span><span class=\"tag\">Vulkan</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"005.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"006.html\" target=\"_blank\">NVIDIA NeMoClaw — NVIDIA 开源 GPU 优化工具</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">NVIDIA 官方开源的 GPU 性能优化工具（237 HN points）。专门针对大模型训练和推理场景的 GPU 调度和内存管理优化。对程序员：跑大模型训练时能获得更好的 GPU 利用率和显存效率。内容角度：NVIDIA 官方出品，&quot;AI 训练加速&quot;话题自带流量。</p><div class=\"meta\"><span class=\"tag\">NVIDIA</span><span class=\"tag\">GPU优化</span><span class=\"tag\">大模型训练</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"006.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"007.html\" target=\"_blank\">Agent-SAT — AI 自动研究 SAT 求解器</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用 AI Agent 自动化研究 SAT 求解器（布尔可满足性问题）的开源项目。SAT 是计算机科学核心难题之一，在芯片验证、调度、AI 推理中都有广泛应用。对程序员：SAT 求解器性能直接影响很多工程工具的效率，这个方向结合了 AI + 形式化方法，非常硬核。内容角度：&quot;AI + 形式化验证&quot;小众赛道，差异化强，适合技术深度内容。</p><div class=\"meta\"><span class=\"tag\">SAT求解器</span><span class=\"tag\">AI研究</span><span class=\"tag\">形式化方法</span><span class=\"tag\">自动化</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"007.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"008.html\" target=\"_blank\">Tmux-IDE — 基于 Tmux 的开源 AI 终端 IDE</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一款以 AI 智能体为核心的终端 IDE，基于 Tmux 构建（63 HN points）。把 AI 编程能力直接嵌入终端工作流，无需切换到 VS Code 等 GUI。对程序员：适合喜欢在终端工作的人，AI 直接在同一个界面里读写文件、跑命令。内容角度：差异化&quot;AI + 终端&quot;工具，相比 Cursor/VSCode 抢占终端重度用户。</p><div class=\"meta\"><span class=\"tag\">终端工具</span><span class=\"tag\">Tmux</span><span class=\"tag\">AI IDE</span><span class=\"tag\">开源</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"008.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"009.html\" target=\"_blank\">shadPS4 — 开源 PS4 模拟器</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用 C++ 编写的 PlayStation 4 模拟器，支持 Windows、Linux、macOS，29k Stars，今天新增 237 颗。虽然不是 AI 项目，但开源模拟器社区一直很火，且和 AI 编程有一定交集（部分开发者用 AI 辅助写模拟器代码）。对程序员：可以关注模拟器逆向工程技术，或用于游戏开发调试。内容角度：游戏模拟器话题自带流量，短视频/直播效果好。</p><div class=\"meta\"><span class=\"tag\">模拟器</span><span class=\"tag\">PS4</span><span class=\"tag\">开源</span><span class=\"tag\">C++</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"009.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"010.html\" target=\"_blank\">Nightingale — 开源卡拉 OK 应用</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一款开源卡拉 OK 应用，支持电脑上的任意歌曲，507 个 HN points（今日 HN 最高分之一）。可配合歌词文件实现卡拉 OK 效果。对程序员：Electron 应用开源案例，代码质量值得关注；也可作为 AI + 多媒体结合的灵感。内容角度：&quot;开源 + 音乐&quot;组合在 HN 很受欢迎，内容轻松，适合做 demo 类短视频。</p><div class=\"meta\"><span class=\"tag\">开源</span><span class=\"tag\">音乐</span><span class=\"tag\">Electron</span><span class=\"tag\">多媒体</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"010.html\" class=\"btn-detail\">查看详情 →</a></div>";
+            });
+    </script>
+</body>
+</html>

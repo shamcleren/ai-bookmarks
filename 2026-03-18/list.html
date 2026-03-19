@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script src="../calendar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-03-18 AI 工具列表 - AI 工具评测</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #fff; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
+        .back:hover { color: #00d9ff; }
+        h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { color: #888; margin-bottom: 30px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+        .nav a { color: #888; text-decoration: none; padding: 12px 24px; border-radius: 10px; transition: all 0.3s; }
+        .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
+        .item { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 20px; margin-bottom: 12px; transition: all 0.3s; border: 1px solid transparent; }
+        .item:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,217,255,0.2); }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .item h3 { font-size: 17px; }
+        .item h3 a { color: #00d9ff; text-decoration: none; }
+        .item h3 a:hover { text-decoration: underline; }
+        .item .desc { color: #999; font-size: 14px; line-height: 1.6; margin: 10px 0; }
+        .item .meta { display: flex; gap: 10px; font-size: 12px; margin-top: 12px; flex-wrap: wrap; }
+        .tag { padding: 4px 12px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 12px; font-size: 12px; }
+        .tag.rated { background: rgba(255,193,7,0.15); color: #ffc107; }
+        .tag.pending { background: rgba(100,100,100,0.2); color: #888; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+        .badge-test { background: rgba(138,43,226,0.2); color: #b366ff; }
+        .badge-untest { background: rgba(100,100,100,0.2); color: #666; }
+        .btn-detail { display: inline-block; margin-top: 12px; color: #00d9ff; text-decoration: none; font-size: 13px; }
+        .btn-detail:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back">← 返回首页</a>
+        <h1>📅 2026-03-18</h1>
+        <p class="subtitle">本期收录 10 款 AI 工具</p>
+        <div class="nav">
+            <a href="../index.html">🏠 首页</a>
+            <a href="#" data-open-calendar>📅 日历</a>
+            <a href="../rank.html">🏆 榜单</a>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script>
+        fetch('tools.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('list').innerHTML = "<div class=\"item\"><div class=\"item-header\"><h3><a href=\"001.html\" target=\"_blank\">obra/superpowers — Agentic Skills Framework</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一套 Agent 技能框架+软件开发方法论，让 AI Agent 能像专业开发者一样自主完成复杂任务，今天狂揽 4000+ star，总计 9.4 万 star。是什么：把 AI 编程流程封装成可复用的「技能卡」，自动规划、执行、调试。程序员有什么用：直接拿来改造自己的 AI 编程助手，实现自动需求拆解、代码生成、测试闭环。能不能做内容：非常适合！可以演示如何用这个框架让 AI 从 0 构建一个完整项目，视觉冲击强。</p><div class=\"meta\"><span class=\"tag\">AI编程</span><span class=\"tag\">Agent</span><span class=\"tag\">自动化</span><span class=\"tag\">框架</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"001.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"002.html\" target=\"_blank\">unslothai/unsloth — 本地训练大模型Web UI</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">在本地网页界面上训练和运行 Qwen、DeepSeek、Gemma 等开源大模型，今天 975 star，总计 5.5 万 star。是什么：一个统一的 Web UI，把大模型微调（Fine-tuning）的门槛降到普通程序员也能玩。程序员有什么用：不需要写代码，在浏览器里就能给自己的模型喂数据、训练、推理。能不能做内容：太适合了！可以录屏演示怎么用自己的数据集微调一个 Qwen 模型，步骤清晰、效果直观。</p><div class=\"meta\"><span class=\"tag\">大模型</span><span class=\"tag\">本地部署</span><span class=\"tag\">微调</span><span class=\"tag\">开源</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"002.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"003.html\" target=\"_blank\">jarrodwatts/claude-hud — Claude Code 实时透视插件</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Claude Code 的插件，实时显示 AI 的思考过程：用了多少上下文、激活了哪些工具、正在跑哪些 Agent、Todo 进度，今天 1040 star。是什么：把 AI 编程过程的「黑箱」变成可视化 HUD，程序员能清楚看到 AI 在干什么。程序员有什么用：调试 AI 编程行为、了解 token 消耗、找到 AI 失灵的根因。能不能做内容：非常适合！Claude Code 用户群很大，演示这个插件能带来很强的「原来如此」的感受。</p><div class=\"meta\"><span class=\"tag\">Claude</span><span class=\"tag\">AI编程</span><span class=\"tag\">工具</span><span class=\"tag\">开发者体验</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"003.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"004.html\" target=\"_blank\">Mistral AI Forge — 全新 AI 开发平台</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Mistral AI 发布的全新开发者平台，505 点热度。是什么：Mistral 的新一代 AI 工具平台，主打更便宜的推理和更开放的模型生态。程序员有什么用：可以第一时间上手 Mistral 的新模型，做 AI 应用开发。能不能做内容：Mistral 每次发新品都有流量，可以做第一手测评视频，差异化强。</p><div class=\"meta\"><span class=\"tag\">Mistral</span><span class=\"tag\">AI平台</span><span class=\"tag\">大模型</span><span class=\"tag\">开发者工具</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"004.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"005.html\" target=\"_blank\">langchain-ai/open-swe — 开源异步编程 Agent</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">LangChain 推出的开源异步编程 Agent，今天 454 star，5787 总 star。是什么：用 AI Agent 自动处理软件工程任务，比如 bug 修复、代码审查、PR 合并。程序员有什么用：可以作为 CI/CD 的一部分，让 AI 自动处理简单的代码改动，减少人工重复劳动。能不能做内容：适合演示 AI 如何自动修 bug、自动合并 PR，有科技感。</p><div class=\"meta\"><span class=\"tag\">AI编程</span><span class=\"tag\">Agent</span><span class=\"tag\">自动化</span><span class=\"tag\">LangChain</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"005.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"006.html\" target=\"_blank\">Get Shit Done — Meta-prompting 开发系统</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一个 meta-prompting、上下文工程、spec 驱动的开发系统，351 点热度。是什么：让程序员用「写提示词」的方式驱动整个开发流程，AI 负责理解需求、生成规格、写出代码。程序员有什么用：可以大幅减少在需求对齐和代码生成之间来回的时间。能不能做内容：适合做成「用 GSD 方法论做独立开发」的系列视频，有方法论有实战。</p><div class=\"meta\"><span class=\"tag\">AI编程</span><span class=\"tag\">提示词工程</span><span class=\"tag\">方法论</span><span class=\"tag\">开发流程</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"006.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"007.html\" target=\"_blank\">Python 3.15 JIT 回来了</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Python 3.15 的 JIT 编译器重新提上日程，389 点热度。是什么：Python 核心团队正式宣布 JIT 编译器重回开发计划，预计显著提升 Python 运行速度。程序员有什么用：未来 Python 程序不用改代码就能获得 20%+ 的性能提升。能不能做内容：可以讲清楚 Python JIT 的技术原理，以及对普通开发者的实际影响，干货满满。</p><div class=\"meta\"><span class=\"tag\">Python</span><span class=\"tag\">JIT</span><span class=\"tag\">性能优化</span><span class=\"tag\">编程语言</span><span class=\"badge badge-untest\">⏳ 暂不支持</span></div><a href=\"007.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"008.html\" target=\"_blank\">Zeroboot — 亚毫秒级 VM 沙箱</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用 CoW（写时复制）内存分叉实现亚毫秒级 VM 沙箱，178 点热度。是什么：启动一个完整 VM 沙箱只需要亚毫秒（&lt;1ms），传统方案需要几秒。程序员有什么用：可以安全隔离运行不受信的代码，比如插件系统、AI 生成的代码执行环境。能不能做内容：技术硬核，视觉效果（VM 瞬间启动）很强，适合做成「我是怎么做到 1ms 启动 VM 的」技术解析视频。</p><div class=\"meta\"><span class=\"tag\">虚拟机</span><span class=\"tag\">沙箱</span><span class=\"tag\">安全</span><span class=\"tag\">底层技术</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"008.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"009.html\" target=\"_blank\">Pgit — 用 PostgreSQL 做的类 Git CLI</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用 PostgreSQL 作为底层存储的类 Git 命令行工具，51 点热度。是什么：把 Git 的版本控制逻辑用 SQL 实现，数据存在 PostgreSQL 里而不是 .git 目录。程序员有什么用：可以做版本控制的定制化开发，比如把代码库存进数据库做复杂查询，适合企业内部代码分析场景。能不能做内容：概念有趣，可以演示「我的代码库在数据库里长什么样」，小众但吸睛。</p><div class=\"meta\"><span class=\"tag\">Git</span><span class=\"tag\">PostgreSQL</span><span class=\"tag\">CLI</span><span class=\"tag\">数据库</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"009.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"010.html\" target=\"_blank\">shadPS4 — 开源 PS4 模拟器</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用 C++ 写的 PlayStation 4 模拟器，支持 Windows、Linux、macOS，今天 683 star，总计 2.9 万 star。是什么：让你在电脑上玩 PS4 游戏的开源模拟器，技术含量极高，涉及复杂的系统级逆向。程序员有什么用：可以学习如何做系统级模拟/逆向工程，了解游戏主机架构。能不能做内容：模拟器类内容一直有流量，可以做「用开源模拟器玩 3A 大作」的展示视频，画面冲击强。</p><div class=\"meta\"><span class=\"tag\">模拟器</span><span class=\"tag\">游戏</span><span class=\"tag\">C++</span><span class=\"tag\">逆向工程</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"010.html\" class=\"btn-detail\">查看详情 →</a></div>";
+            });
+    </script>
+</body>
+</html>
