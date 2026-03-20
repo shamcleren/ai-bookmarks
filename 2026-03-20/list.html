@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script src="../calendar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-03-20 AI 工具列表 - AI 工具评测</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: #fff; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .back { color: #666; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 30px; }
+        .back:hover { color: #00d9ff; }
+        h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { color: #888; margin-bottom: 30px; }
+        .nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+        .nav a { color: #888; text-decoration: none; padding: 12px 24px; border-radius: 10px; transition: all 0.3s; }
+        .nav a:hover, .nav a.active { color: #00d9ff; background: rgba(0,217,255,0.15); }
+        .item { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 20px; margin-bottom: 12px; transition: all 0.3s; border: 1px solid transparent; }
+        .item:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,217,255,0.2); }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .item h3 { font-size: 17px; }
+        .item h3 a { color: #00d9ff; text-decoration: none; }
+        .item h3 a:hover { text-decoration: underline; }
+        .item .desc { color: #999; font-size: 14px; line-height: 1.6; margin: 10px 0; }
+        .item .meta { display: flex; gap: 10px; font-size: 12px; margin-top: 12px; flex-wrap: wrap; }
+        .tag { padding: 4px 12px; background: rgba(0,255,136,0.12); color: #00ff88; border-radius: 12px; font-size: 12px; }
+        .tag.rated { background: rgba(255,193,7,0.15); color: #ffc107; }
+        .tag.pending { background: rgba(100,100,100,0.2); color: #888; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; }
+        .badge-test { background: rgba(138,43,226,0.2); color: #b366ff; }
+        .badge-untest { background: rgba(100,100,100,0.2); color: #666; }
+        .btn-detail { display: inline-block; margin-top: 12px; color: #00d9ff; text-decoration: none; font-size: 13px; }
+        .btn-detail:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back">← 返回首页</a>
+        <h1>📅 2026-03-20</h1>
+        <p class="subtitle">本期收录 10 款 AI 工具</p>
+        <div class="nav">
+            <a href="../index.html">🏠 首页</a>
+            <a href="#" data-open-calendar>📅 日历</a>
+            <a href="../rank.html">🏆 榜单</a>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script>
+        fetch('tools.json')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('list').innerHTML = "<div class=\"item\"><div class=\"item-header\"><h3><a href=\"001.html\" target=\"_blank\">Astral to Join OpenAI</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Rust 生态明星项目 Astral（uv、ruff 背后团队）宣布加入 OpenAI。uv 是 Python 包管理革命者，ruff 是 Rust 写的高速 Python linter。对程序员来说，这意味着 uv/ruff 这类工具未来可能会深度集成进 OpenAI 产品线，也意味着 Rust 在 AI 基础设施中的地位越来越稳。Astral 创始人的技术决策一向引领潮流，加入 OpenAI 后会带来什么？值得持续关注。妥妥的科技圈大事件，内容角度多。</p><div class=\"meta\"><span class=\"tag\">AI行业</span><span class=\"tag\">Rust</span><span class=\"tag\">Python工具</span><span class=\"tag\">OpenAI</span><span class=\"badge badge-untest\">⏳ 暂不支持</span></div><a href=\"001.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"002.html\" target=\"_blank\">obra / superpowers</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一个 agentic skills 框架，教 AI 编程助手如何像专业开发者一样工作——拆解任务、制定计划、使用工具，3 天狂揽 10 万星。对程序员而言，这是目前最系统的 AI 编程工作流方法论之一，直接影响 Claude Code、Cursor 等工具的使用思路。想提升 AI 编程效率的人必看。演示 demo 非常有画面感，非常适合做短视频。</p><div class=\"meta\"><span class=\"tag\">AI编程方法论</span><span class=\"tag\">Agent框架</span><span class=\"tag\">Claude Code</span><span class=\"tag\">Cursor</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"002.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"003.html\" target=\"_blank\">Kitten TTS – 最小模型不到 25MB</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">全新的开源 Text-to-Speech 模型系列，最小的不到 25MB，可以直接在树莓派、手机甚至浏览器上跑。对程序员来说，这是目前最易部署的 TTS 方案之一，做 AI 应用、语音助手、无障碍工具的利器。25MB 的 TTS 模型这个数字本身就很抓眼球，做对比测评短视频效果会很好。</p><div class=\"meta\"><span class=\"tag\">TTS语音合成</span><span class=\"tag\">开源模型</span><span class=\"tag\">本地部署</span><span class=\"tag\">端侧AI</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"003.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"004.html\" target=\"_blank\">Claude Code Channels</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Claude Code 刚刚推出的 Channels 功能，让 Claude Code 可以同时在多个「频道」里并行工作——相当于给 AI 编程助手开了多线程。对程序员来说，这是工作流效率的质的提升，可以同时处理多个独立任务而不互相干扰。HN 上 72 条讨论，刚发布 1 小时就上榜，说明大家都在关注。</p><div class=\"meta\"><span class=\"tag\">Claude Code</span><span class=\"tag\">AI编程助手</span><span class=\"tag\">工作流优化</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"004.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"005.html\" target=\"_blank\">jarrodwatts / claude-hud</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">Claude Code 插件，实时显示 AI 在干什么——上下文 token 用量、激活的工具、运行的 agents、todo 进度，1 天 1800+ 星。对用 Claude Code 写代码的人来说，这是目前最直观的调试/监控工具，能看清 AI 的「思考过程」。截图效果酷炫，做短视频演示非常抓眼球。</p><div class=\"meta\"><span class=\"tag\">Claude Code插件</span><span class=\"tag\">AI透明度</span><span class=\"tag\">编程工具</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"005.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"006.html\" target=\"_blank\">gsd-build / get-shit-done</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">为 Claude Code 量身打造的 meta-prompting 框架，教你怎么给 AI 描述任务才能得到最好的代码结果，3.6 万星。对想用好 Claude Code、Cursor 的程序员来说，这本书面的指南比大多数教程都实用。可以直接拿来提升团队 AI 编程效率。</p><div class=\"meta\"><span class=\"tag\">Claude Code</span><span class=\"tag\">Prompt工程</span><span class=\"tag\">AI编程</span><span class=\"tag\">效率工具</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"006.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"007.html\" target=\"_blank\">shareAI-lab / learn-claude-code</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">用纯 Bash 从零复刻一个类似 Claude Code 的 agent harness，3.3 万星。A的角度很独特——不是教你用 AI 写代码，而是教你 AI 是怎么做编程的。看完你会理解 AI 编程助手的本质工作原理，对自己写 prompt、设计工作流都有帮助。非常适合做技术解析类短视频。</p><div class=\"meta\"><span class=\"tag\">Claude Code原理</span><span class=\"tag\">AI Agent</span><span class=\"tag\">Bash</span><span class=\"tag\">技术解析</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"007.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"008.html\" target=\"_blank\">unslothai / unsloth</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">在本地运行和微调开源大模型（Qwen、DeepSeek、Gemma等）的统一 Web UI，5.6 万星。对程序员来说，这是目前最低门槛的本地大模型训练方案，显存要求低、支持全系列开源模型。做大模型应用、AI 编程助手的开发者一定会需要。可以做「5 分钟在 Mac 上跑自己的代码助手」类短视频。</p><div class=\"meta\"><span class=\"tag\">开源大模型</span><span class=\"tag\">本地部署</span><span class=\"tag\">模型微调</span><span class=\"tag\">AI编程</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"008.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"009.html\" target=\"_blank\">Be intentional about how AI changes your codebase</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">一篇深度分析，揭示 AI 编程助手（Claude Code 等）对你的代码库做了什么——哪些改动了，哪些没改动，影响是什么。对已经在用 AI 编程的程序员来说，这是一篇难得的数据驱动分析，能帮助你更理性地评估 AI 的实际价值。HN 上引发了不少讨论，有深度。</p><div class=\"meta\"><span class=\"tag\">AI编程影响分析</span><span class=\"tag\">Claude Code</span><span class=\"tag\">代码库</span><span class=\"tag\">实践指南</span><span class=\"badge badge-untest\">⏳ 暂不支持</span></div><a href=\"009.html\" class=\"btn-detail\">查看详情 →</a></div><div class=\"item\"><div class=\"item-header\"><h3><a href=\"010.html\" target=\"_blank\">langchain-ai / open-swe</a></h3><span class=\"tag pending\">待评测</span></div><p class=\"desc\">LangChain 推出的开源异步编程 Agent，专门处理软件工程任务——自动修 bug、做 PR review、写测试，965 星今天。对程序员来说，这是目前最接近生产级的开源 AI 编程 Agent 之一，可以直接拿来集成到自己的 CI/CD 或者开发流程里。想做 AI 编程工具类内容的，这是个不错的案例项目。</p><div class=\"meta\"><span class=\"tag\">AI编程Agent</span><span class=\"tag\">LangChain</span><span class=\"tag\">自动化测试</span><span class=\"tag\">开源AI</span><span class=\"badge badge-test\">🤖 可 AI 评测</span></div><a href=\"010.html\" class=\"btn-detail\">查看详情 →</a></div>";
+            });
+    </script>
+</body>
+</html>
