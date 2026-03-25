@@ -1,1 +1,44 @@
-{"dates":[{"date":"2026-03-24","issue":8,"toolCount":10},{"date":"2026-03-23","issue":7,"toolCount":10},{"date":"2026-03-22","issue":6,"toolCount":10},{"date":"2026-03-21","issue":5,"toolCount":10},{"date":"2026-03-20","issue":4,"toolCount":10},{"date":"2026-03-19","issue":3,"toolCount":10},{"date":"2026-03-16","issue":1,"toolCount":10}]}
+{
+  "dates": [
+    {
+      "date": "2026-03-25",
+      "issue": 9,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-24",
+      "issue": 8,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-23",
+      "issue": 7,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-22",
+      "issue": 6,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-21",
+      "issue": 5,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-20",
+      "issue": 4,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-19",
+      "issue": 3,
+      "toolCount": 10
+    },
+    {
+      "date": "2026-03-16",
+      "issue": 1,
+      "toolCount": 10
+    }
+  ]
+}
